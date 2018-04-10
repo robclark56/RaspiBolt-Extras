@@ -25,7 +25,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 |<img src="images/maintest.jpg" alt="Simultaneous mainnet & testnet" height="100" width="250">|The objective of this Extra is to have two instances of bitcoind and two of lnd running on the same RaspiBolt.|
 |---|:--|
 
-* [Simultaneous mainnet & testnet](RB_extra_03.md)
+3. [Simultaneous mainnet & testnet](RB_extra_03.md)
 
 ---
 
