@@ -33,15 +33,15 @@ To unlock a wallet, the password must be entered. If that password is stored on 
 Setup Billing as needed. You get US$300 free usage.
 
 * Click the Hamburger menu icon > Compute Engine > VM Instances
-![GPC](images/71_GCP01.png)
+![GPC](images/RBE_01_GCP01.png)
 * Click *Create Instance*
 * Select Machine Type = *Micro*
 * Select Boot Disk = *Debian GNU/Linux*
 * Click *Create*
  
-![GPC](images/71_GCP02.png)
+![GPC](images/RBE_01_GCP02.png)
 
-![GPC](images/71_GCP03.png)
+![GPC](images/RBE_01_GCP03.png)
 
 * Select Connect > Open in browser window
 
