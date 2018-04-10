@@ -8,9 +8,12 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 # The 'Lights Out' RaspiBolt
 
-<img src="images/lightsoff.gif" alt="Lights Off" style="height: 10px;"/>
+|<img src="images/lightsoff.gif" alt="Lights Off" height="100">|The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change in public IP.|
+|---|:--|
 
-The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change in public IP.
+
+
+
 
 1. [Auto LND Wallet Unlock](RB_extra_01.md)
 1. [Dynamic Public IP Address](RB_extra_02.md)
