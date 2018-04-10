@@ -11,8 +11,8 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change inpublic IP chage
 
-* [Auto LND Wallet Unlock](RB_extra_01.md)
-* [Dynamic Public IP Address](RB_extra_02.md)
+1. [Auto LND Wallet Unlock](RB_extra_01.md)
+1. [Dynamic Public IP Address](RB_extra_02.md)
 
 ---
 
