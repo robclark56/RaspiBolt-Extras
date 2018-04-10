@@ -19,6 +19,7 @@ The objective of this pair of Extras is to allow a RaspiBolt to recover *without
 # Running LND mainnet & testnet Simultaneously on one RaspiBolt
 
 [Simultaneous mainnet & testnet](RB_extra_03.md)
+
 ![Main Test](images/maintest.jpg)
 
 ---
