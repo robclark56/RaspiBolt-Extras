@@ -7,7 +7,8 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 ---
 
 # The 'Lights Out' RaspiBolt
-![Lights Off](images/lightsoff.gif)
+
+<img src="images/lightsoff.gif" alt="Lights Off" style="height: 10px;"/>
 
 The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change in public IP.
 
