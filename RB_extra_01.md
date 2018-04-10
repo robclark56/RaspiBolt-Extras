@@ -107,7 +107,7 @@ $ ./lncli -h
 [You should see the lncli help]
 ```
 ## Modify local firewall and port forwarding ##
-* Add a new Port Forward for port 10009 on your router. See [ Rasberry Pi ](raspibolt_20_pi.md)
+* Add a new Port Forward for port 10009 on your router. See [ Rasberry Pi ](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_20_pi.md)
 * login as admin to your RaspiBolt
 * Allow rpc from your VM in RaspiBolt firewall
 
