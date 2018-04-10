@@ -18,9 +18,7 @@ The objective of this pair of Extras is to allow a RaspiBolt to recover *without
 
 # Running LND mainnet & testnet Simultaneously on one RaspiBolt
 
+tba
 
 ---
 
-# xxxx
-
----
