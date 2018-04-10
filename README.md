@@ -13,12 +13,10 @@ The objective of this pair of Extras is to allow a RaspiBolt to recover *without
 
 ## Auto LND Wallet Unlock
 xxxxx
-## Dynamic Public IP Address
-xxxxx
-# Running LND Testnet & Mainnet at same time
-xxxxx
 
 ---
 
+## Dynamic Public IP Address
+xxxxx
 
-
+---
