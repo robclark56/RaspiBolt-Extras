@@ -8,25 +8,25 @@ There is no reason that you can not run both mainnet & testnet lnd instances at 
 This table shows the state we need to get to so the two lnd instances do not clash. 
 
 |Module|Chain|Item|Original<br>After|Change?|
-|-----:|-----|----|--------|------------|
-|bitcoind|mainnet|Port|8333<br>8333||
-|||RPC Port|xx|xx|
+|-----:|-----|----|:-------|------------|
+|bitcoind|mainnet|Public Port|8333<br>8333||
+|||RPC Port|8332<br>8332||
 |||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>|xx|
 |||service file|/etc/systemd/system/bitcoind.service<br>|xx|
 |||data/log files|xx<br>|xx|
-||testnet|Port|18333<br>18333|<br>|
-|||RPC Port|xx<br>|xx|
+||testnet|Public Port|18333<br>18333||
+|||RPC Port|18332<br>18332||
 |||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>|xx|
 |||service file|/etc/systemd/system/bitcoind.service<br>|xx|
 |||data/log files|xx<br>|xx|
-|lnd|mainnet|Port|9375<br>9375||
+|lnd|mainnet|Public Port|9375<br>9375||
 |||RPC Port|10009<br>10009||
 |||conf file|/home/bitcoin/.lnd/lnd.conf<br>|xx|
 |||service file|/etc/systemd/system/lnd.service<br>|xx|
 |||data/wallet files|???<br> |xx|
 |||log files|/home/bitcoin/.lnd<br>|xx|
 |||Security files|/home/bitcoin/.lnd<br>|xx|
-||testnet|Port|9375<br>19375|Yes|
+||testnet|Public Port|9375<br>19375|Yes|
 |||RPC Port|10009<br>11009|Yes|
 |||conf file|/home/bitcoin/.lnd/lnd.conf<br>|xx|
 |||service file|/etc/systemd/system/lnd.service<br>|xx|
