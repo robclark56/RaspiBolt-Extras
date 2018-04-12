@@ -11,27 +11,27 @@ This table shows the state we need to get to so the two lnd instances do not cla
 |-----:|-----|----|:-------|------------|
 |bitcoind|mainnet|Public Port|8333<br>8333||
 |||RPC Port|8332<br>8332||
-|||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>|xx|
-|||service file|/etc/systemd/system/bitcoind.service<br>|xx|
+|||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>/home/bitcoin/.bitcoin/bitcoin.conf||
+|||service file|/etc/systemd/system/bitcoind.service<br>/etc/systemd/system/bitcoind.service||
 |||data/log files|xx<br>|xx|
 ||testnet|Public Port|18333<br>18333||
 |||RPC Port|18332<br>18332||
-|||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>|xx|
-|||service file|/etc/systemd/system/bitcoind.service<br>|xx|
+|||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>/home/bitcoin/.bitcoin/bitcoin_testnet.conf|Yes|
+|||service file|/etc/systemd/system/bitcoind.service<br>/etc/systemd/system/bitcoind_testnet.service|Yes|
 |||data/log files|xx<br>|xx|
-|lnd|mainnet|Public Port|9375<br>9375||
+|lnd|mainnet|Public Port|9735<br>9735||
 |||RPC Port|10009<br>10009||
 |||conf file|/home/bitcoin/.lnd/lnd.conf<br>|xx|
-|||service file|/etc/systemd/system/lnd.service<br>|xx|
+|||service file|/etc/systemd/system/lnd.service<br>/etc/systemd/system/lnd.service||
 |||data/wallet files|???<br> |xx|
-|||log files|/home/bitcoin/.lnd<br>|xx|
-|||Security files|/home/bitcoin/.lnd<br>|xx|
-||testnet|Public Port|9375<br>19375|Yes|
+|||log files|/home/bitcoin/.lnd<br>???|xx|
+|||Security files|/home/bitcoin/.lnd<br>???|xx|
+||testnet|Public Port|9735<br>19735|Yes|
 |||RPC Port|10009<br>11009|Yes|
-|||conf file|/home/bitcoin/.lnd/lnd.conf<br>|xx|
-|||service file|/etc/systemd/system/lnd.service<br>|xx|
-|||data/wallet files|/home/bitcoin/.lnd/data/chain/bitcoin/testnet<br>|xx|
-|||log files|/home/bitcoin/.lnd/logs/bitcoin/testnet<br>|xx|
-|||Security files|/home/bitcoin/.lnd<br>|xx|
+|||conf file|/home/bitcoin/.lnd/lnd.conf<br>/home/bitcoin/.lnd/lnd_testnet.conf|Yes|
+|||service file|/etc/systemd/system/lnd.service<br>/etc/systemd/system/lnd_testnet.service|Yes|
+|||data/wallet files|/home/bitcoin/.lnd/data/chain/bitcoin/testnet<br>/home/bitcoin/.lnd/data/chain/bitcoin/testnet||
+|||log files|/home/bitcoin/.lnd/logs/bitcoin/testnet<br>/home/bitcoin/.lnd/logs/bitcoin/testnet||
+|||Security files|/home/bitcoin/.lnd<br>????|xx|
 
 
