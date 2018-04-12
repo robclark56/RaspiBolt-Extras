@@ -35,3 +35,14 @@ This table shows the state we need to get to so the two lnd instances do not cla
 |||Security files|/home/bitcoin/.lnd<br>????|xx|
 
 
+`Use Password_[A]`
+
+admin ~  ฿  sudo adduser bitcoin_testnet
+admin ~  ฿  cd /mnt/hdd 
+admin /mnt/hdd  ฿  sudo su bitcoin
+bitcoin@RaspiBolt:/mnt/hdd $ mkdir bitcoin_testnet
+bitcoin@RaspiBolt:/mnt/hdd $ mkdir lnd_testnet
+bitcoin@RaspiBolt:/mnt/hdd $ exit
+admin /mnt/hdd  ฿  sudo chown -R bitcoin_testnet:bitcoin_testnet /mnt/hdd/bitcoin_testnet
+admin /mnt/hdd  ฿  sudo chown -R bitcoin_testnet:bitcoin_testnet /mnt/hdd/lnd_testnet
+
