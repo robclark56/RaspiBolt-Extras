@@ -46,3 +46,4 @@ bitcoin@RaspiBolt:/mnt/hdd $ exit
 admin /mnt/hdd  ฿  sudo chown -R bitcoin_testnet:bitcoin_testnet /mnt/hdd/bitcoin_testnet
 admin /mnt/hdd  ฿  sudo chown -R bitcoin_testnet:bitcoin_testnet /mnt/hdd/lnd_testnet
 
+
