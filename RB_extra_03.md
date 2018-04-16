@@ -30,7 +30,7 @@ $ exit
 ```
 <details><summary>Click to expand</summary><p>
   
-```
+```bash
 root@RaspiBolt:/home/admin# ufw status
 Status: active
 
@@ -75,6 +75,7 @@ Create or update these 4 files.
 1. /home/bitcoin/.bitcoin/testnet3/bitcoin.conf
 
 The command to use is:
+
 `admin ~  ฿  sudo nano <filename>`
 
 Don't forget to:
@@ -216,7 +217,7 @@ Create or update these 4 files.
 
 `admin ~  ฿  sudo nano /etc/systemd/system/bitcoind.service`
 
-```
+```bash
 # RaspiBolt LND Mainnet: systemd unit for bitcoind
 # /etc/systemd/system/bitcoind.service
 
@@ -272,12 +273,12 @@ RestartSec=30
 WantedBy=multi-user.target
 ```
 `admin ~  ฿  sudo nano /etc/systemd/system/lnd.service`
-```
+```bash
 xxxx
 ```
 
 `admin ~  ฿  sudo nano /etc/systemd/system/lnd_testnet.service`
-```
+```bash
 # RaspiBolt LND Testnet: systemd unit for lnd
 # /etc/systemd/system/lnd_testnet.service
 
