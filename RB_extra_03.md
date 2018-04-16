@@ -380,10 +380,7 @@ To simplify accessing the 4 deamons from the command line, setup these 4 aliases
 ```bash
 alias bcm='bitcoin-cli -datadir=/home/bitcoin/.bitcoin'
 alias bct='bcm -testnet'
-alias lcm='lncli \
-              --macaroonpath=/home/bitcoin/.lnd/admin.macaroon \
-              --tlscertpath=/home/bitcoin/.lnd/tls.cert \
-              '
+alias lcm='lncli'
 alias lct='lcm --rpcserver=localhost:11009'
 ```
 To test these are working OK...
