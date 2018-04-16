@@ -4,7 +4,7 @@ UNDER CONSTRUCTION
 # Introduction #
 There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one RaspiBolt. These instructions assume you have a working RaspiBolt running in Testnet mode.
 
-# An Diagram to make things clearer #
+# A Diagram to make things clearer #
 ![Image Ports](images/RaspiBoltDuo02.png)
 
 After completing these instructions here, the 4 instances shown will be operating on the ports shown above. 
