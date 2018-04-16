@@ -74,13 +74,16 @@ Create or update these 4 files.
 1. /home/bitcoin/.bitcoin/lnd????????.conf
 1. /home/bitcoin/.bitcoin/testnet3/bitcoin.conf
 
-`admin ~  ฿  sudo nano /home/bitcoin/.bitcoin/bitcoin.conf`
+The command to use is:
+`admin ~  ฿  sudo nano <filename>`
 
-Note: Change PASSWORD_[B] to your PASSWORD_[B]
+Don't forget to:
+* Change PASSWORD_[B] to your PASSWORD_[B] in the bitcoin.conf files
+* Edit this line as needed: *alias=YOUR_NAME [LND]* in the lnd.conf files
 
 <details><summary>Click to see /home/bitcoin/.bitcoin/bitcoin.conf</summary><p>
 
-```
+```bash
 # RaspiBolt LND  bitcoind configuration
 # /home/bitcoin/.bitcoin/bitcoin.conf
 
@@ -106,10 +109,9 @@ maxuploadtarget=5000
 ```
 </p></details>
 
-`admin ~  ฿  sudo nano /home/bitcoin/.bitcoin/testnet3/bitcoin.conf`
+<details><summary>Click to see /home/bitcoin/.bitcoin/testnet3/bitcoin.conf</summary><p>
 
-Note: Change PASSWORD_[B] to your PASSWORD_[B]
-```
+```bash
 # RaspiBolt LND  bitcoind configuration
 # /home/bitcoin/.bitcoin/testnet3/bitcoin.conf
 
@@ -134,11 +136,12 @@ maxmempool=50
 maxconnections=40
 maxuploadtarget=5000
 ```
+</p></details>
 
-`admin ~  ฿  sudo cat /home/bitcoin/.lnd/lnd.conf`
 
-Note: Edit this line as needed: *alias=YOUR_NAME [LND]*
-```
+<details><summary>Click to see /home/bitcoin/.lnd/lnd.conf</summary><p>
+
+```bash
 # RaspiBolt LND Mainnet: lnd configuration
 # /home/bitcoin/.lnd/lnd.conf
 
@@ -166,11 +169,11 @@ autopilot.active=1
 autopilot.maxchannels=5
 autopilot.allocation=0.6
 ```
+</p></details>
 
-`admin ~  ฿  sudo cat /home/bitcoin/.lnd/testnet3/lnd.conf`
+<details><summary>Click to see /home/bitcoin/.lnd/testnet3/lnd.conf</summary><p>
 
-Note: Edit this line as needed: *alias=YOUR_NAME [LND]*
-```
+```bash
 # RaspiBolt LND Testnet: lnd configuration
 # /home/bitcoin/.lnd/testnet3/lnd.conf
 
@@ -201,6 +204,7 @@ autopilot.active=1
 autopilot.maxchannels=5
 autopilot.allocation=0.6
 ```
+</p></details>
 
 ## New services ##
 Create or update these 4 files.
