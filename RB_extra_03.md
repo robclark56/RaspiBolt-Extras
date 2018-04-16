@@ -18,9 +18,25 @@ After completing these instructions here, the 4 instances shown will be operatin
 1. [Optional] [Update the raspibolt System Overview utility](#update-the-raspibolt-system-overview-utility)
 
 ## Shutdown existing services ##
+```
+admin ~  ฿  sudo systemctl stop lnd
+admin ~  ฿  sudo systemctl stop bitcoind
+admin ~  ฿  sudo systemctl disable lnd
+admin ~  ฿  sudo systemctl disable bitcoind
+```
 ## Create new conf files ##
 ## Create new services ##
 ## Enable and start new services ##
+```
+admin ~  ฿  sudo systemctl enable bitcoind
+admin ~  ฿  sudo systemctl enable bitcoind_testnet
+admin ~  ฿  sudo systemctl enable lnd
+admin ~  ฿  sudo systemctl enable lnd_testnet
+admin ~  ฿  sudo systemctl start bitcoind
+admin ~  ฿  sudo systemctl start bitcoind_testnet
+admin ~  ฿  sudo systemctl start lnd
+admin ~  ฿  sudo systemctl start lnd_testnet
+```
 ## Update the raspibolt System Overview utility ##
 
 
