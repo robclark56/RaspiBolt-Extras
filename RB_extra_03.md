@@ -1,6 +1,8 @@
 [All Extras](README.md) / Simultaneous mainnet & testnet
 
 UNDER CONSTRUCTION
+
+![RaspiBoltDuo](images/RaspiBoltDuo.png)
 # Introduction #
 There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running in Testnet or Mainnet mode.
 
