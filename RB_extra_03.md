@@ -15,17 +15,15 @@ After completing these instructions here, the 4 instances shown will be operatin
 1. [Shutdown existing services](#shutdown-existing-services)
 1. [Create new conf files](#new-conf-files)
 1. [Create new services](#new-services)
-1. [Open new firewall ports](#open-new-firewall-ports)
+1. [Open new firewall port](#open-new-firewall-port)
 1. [Enable and start new services](#enable-and-start-new-services)
 1. [Optional] [Update the raspibolt System Overview utility](#update-the-raspibolt-system-overview-utility)
 
 ## Open New Firewall Port ##
 1. Open new port in RaspiBolt
 
-
 `admin ~  ฿  sudo su`
 ```
-
 $ ufw allow 19735  comment 'allow Lightning testnet'
 $ ufw status
 $ exit
@@ -65,13 +63,14 @@ admin ~  ฿  sudo systemctl disable lnd
 admin ~  ฿  sudo systemctl disable bitcoind
 ```
 ## New conf files ##
-Create or update these 2 files.
+Create or update these 4 files.
 1. /home/bitcoin/.bitcoin/bitcoin.conf
 1. /home/bitcoin/.bitcoin/testnet3/bitcoin.conf
 1. /home/bitcoin/.bitcoin/lnd????????.conf
 1. /home/bitcoin/.bitcoin/testnet3/bitcoin.conf
 
 `admin ~  ฿  sudo nano /home/bitcoin/.bitcoin/bitcoin.conf`
+
 Note: Change PASSWORD_[B] to your PASSWORD_[B]
 ```
 
@@ -100,6 +99,7 @@ maxuploadtarget=5000
 ```
 
 `admin ~  ฿  sudo nano /home/bitcoin/.bitcoin/testnet3/bitcoin.conf`
+
 Note: Change PASSWORD_[B] to your PASSWORD_[B]
 ```
 # RaspiBolt LND  bitcoind configuration
@@ -128,7 +128,8 @@ maxuploadtarget=5000
 ```
 
 `admin ~  ฿  sudo cat /home/bitcoin/.lnd/lnd.conf`
-Edit this line as needed: *alias=YOUR_NAME [LND]*
+
+Note: Edit this line as needed: *alias=YOUR_NAME [LND]*
 ```
 # RaspiBolt LND Mainnet: lnd configuration
 # /home/bitcoin/.lnd/lnd.conf
@@ -159,7 +160,8 @@ autopilot.allocation=0.6
 ```
 
 `admin ~  ฿  sudo cat /home/bitcoin/.lnd/testnet3/lnd.conf`
-Edit this line as needed: *alias=YOUR_NAME [LND]*
+
+Note: Edit this line as needed: *alias=YOUR_NAME [LND]*
 ```
 # RaspiBolt LND Testnet: lnd configuration
 # /home/bitcoin/.lnd/testnet3/lnd.conf
