@@ -28,7 +28,7 @@ $ ufw allow 19735  comment 'allow Lightning testnet'
 $ ufw status
 $ exit
 ```
-<details><summary>Click to expand</summary><p>
+<details><summary>Click to see ufw status</summary><p>
   
 ```bash
 root@RaspiBolt:/home/admin# ufw status
@@ -48,7 +48,7 @@ To                         Action      From
 ```
 </p>
 </details>
-
+<br>
 
 2. Open new port in Router
 
@@ -214,8 +214,11 @@ Create or update these 4 files.
 1. lnd.service
 1. lnd_testnet.service
 
+The command to use is:
 
-`admin ~  ฿  sudo nano /etc/systemd/system/bitcoind.service`
+`admin ~  ฿  sudo nano <filename>`
+
+<details><summary>Click to see /etc/systemd/system/bitcoind.service</summary><p>
 
 ```bash
 # RaspiBolt LND Mainnet: systemd unit for bitcoind
@@ -243,10 +246,11 @@ RestartSec=30
 [Install]
 WantedBy=multi-user.target
 ```
+</p></details>
 
-`admin ~  ฿ sudo nano /etc/systemd/system/bitcoind_testnet.service`
+<details><summary>Click to see /etc/systemd/system/bitcoind_testnet.service</summary><p>
 
-```
+```bash
 # RaspiBolt LND Testnet: systemd unit for bitcoind
 # /etc/systemd/system/bitcoind_testnet.service
 
@@ -272,12 +276,17 @@ RestartSec=30
 [Install]
 WantedBy=multi-user.target
 ```
-`admin ~  ฿  sudo nano /etc/systemd/system/lnd.service`
+</p></details>
+
+<details><summary>Click to see /etc/systemd/system/lnd.service</summary><p>
+  
 ```bash
 xxxx
 ```
+</p></details>
 
-`admin ~  ฿  sudo nano /etc/systemd/system/lnd_testnet.service`
+<details><summary>Click to see /etc/systemd/system/lnd_testnet.service</summary><p>
+  
 ```bash
 # RaspiBolt LND Testnet: systemd unit for lnd
 # /etc/systemd/system/lnd_testnet.service
@@ -308,6 +317,7 @@ RestartSec=60
 WantedBy=multi-user.target
 
 ```
+</p></details>
 
 ## Enable and start new services ##
 ```
@@ -322,6 +332,7 @@ admin ~  ฿  sudo systemctl start lnd_testnet
 ```
 ## Update the raspibolt System Overview utility ##
 
+tba
 
 # Summary of Changes Needed #
 This table shows the state we need to get to so the two lnd instances do not clash. 
