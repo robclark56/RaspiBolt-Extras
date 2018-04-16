@@ -17,6 +17,7 @@ After completing these instructions here, the 4 instances shown will be operatin
 1. [Create new services](#new-services)
 1. [Open new firewall port](#open-new-firewall-port)
 1. [Enable and start new services](#enable-and-start-new-services)
+1. [cli Aliases](#cli-aliases)
 1. [Optional] [Update the raspibolt System Overview utility](#update-the-raspibolt-system-overview-utility)
 
 ## Open New Firewall Port ##
@@ -322,6 +323,40 @@ admin ~  ฿  sudo systemctl start bitcoind_testnet
 admin ~  ฿  sudo systemctl start lnd
 admin ~  ฿  sudo systemctl start lnd_testnet
 ```
+
+## cli Aliases ##
+To simplify accessing the 4 deamons from the command line, setup these 4 aliases for the admin account.
+
+`admin ~  ฿  sudo nano /home/admin/.bash_aliases`
+```bash
+alias bcm='bitcoin-cli -datadir=/home/bitcoin/.bitcoin'
+alias bct='bcm -testnet'
+alias lcm='lncli \
+              --macaroonpath=/home/bitcoin/.lnd/readonly.macaroon \
+              --tlscertpath=/home/bitcoin/.lnd/tls.cert \
+              '
+alias lct='lcm --rpcserver=localhost:11009'
+```
+To test these are working OK...
+```bash
+admin ~  ฿  bcm getblockchaininfo
+...
+  "chain": "main"
+...
+admin ~  ฿  bct getblockchaininfo
+...
+  "chain": "test",
+...
+admin ~  ฿  lcm getinfo
+...
+"testnet": false,
+...
+admin ~  ฿  lct getinfo
+...
+ "testnet": true,
+...
+```
+
 ## Update the raspibolt System Overview utility ##
 
 tba
