@@ -15,6 +15,7 @@ After completing these instructions here, the 4 instances shown will be operatin
 
 1. [Open new firewall port](#open-new-firewall-port)
 1. [Shutdown existing services](#shutdown-existing-services)
+1. [Make testnet3 directory for lnd](make-testnet3-directory-for-lnd)
 1. [New conf files](#new-conf-files)
 1. [New services](#new-services)
 1. [Enable and start new services](#enable-and-start-new-services)
@@ -26,7 +27,7 @@ After completing these instructions here, the 4 instances shown will be operatin
 
 `admin ~  ฿  sudo su`
 ```
-$ ufw allow 19735  comment 'allow Lightning testnet'
+$ ufw allow 19735  comment 'allow Lightning (testnet)'
 $ ufw status
 $ exit
 ```
@@ -54,13 +55,11 @@ To                         Action      From
 
 2. Open new port in Router
 
-Review the [Raspberry Pi](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_20_pi.md) guide from Stadicus. Go to the *Accessing your router* section and add this port forwarding:
+Review the [Raspberry Pi](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_20_pi.md) guide from [Stadicus](https://github.com/Stadicus). Go to the *Accessing your router* section and add this port forwarding:
 
 |Application name|External port|Internal port|Internal IP address|Protocol (TCP or UDP)|
 |--|--|--|--|--|
 |19375|19375|`<Raspibolt IP>`|`<Raspibolt IP>`|BOTH|
-
-
 
 ## Shutdown existing services ##
 ```
@@ -69,6 +68,30 @@ admin ~  ฿  sudo systemctl stop bitcoind
 admin ~  ฿  sudo systemctl disable lnd
 admin ~  ฿  sudo systemctl disable bitcoind
 ```
+
+NO!!!!!
+##Make testnet3 Directory for lnd ##
+```bash
+admin /home/bitcoin/.lnd  ฿  cd /home/bitcoin/.lnd
+admin /home/bitcoin/.lnd  ฿  sudo mkdir testnet3
+admin /home/bitcoin/.lnd  ฿  sudo chown bitcoin:bitcoin testnet3
+admin /home/bitcoin/.lnd  ฿  sudo cp -p *.macaroon testnet3
+admin /home/bitcoin/.lnd  ฿  sudo cp -p tls.* testnet3
+admin /home/bitcoin/.lnd  ฿  sudo cp -pr data testnet3
+admin /home/bitcoin/.lnd  ฿  ls testnet3
+total 36
+drwxr-xr-x 4 bitcoin bitcoin 4096 Apr 16 17:25 .
+drwxr-xr-x 5 bitcoin bitcoin 4096 Apr 16 16:58 ..
+-rw------- 1 bitcoin bitcoin  232 Apr  8 14:29 admin.macaroon
+drwx------ 4 bitcoin bitcoin 4096 Apr  8 14:25 data
+-rw-r--r-- 1 bitcoin bitcoin  115 Apr  8 14:29 invoice.macaroon
+drwx------ 3 bitcoin bitcoin 4096 Apr  2 11:20 logs
+-rw-r--r-- 1 bitcoin bitcoin  183 Apr  8 14:29 readonly.macaroon
+-rw-r--r-- 1 bitcoin bitcoin  741 Apr  8 19:45 tls.cert
+-rw------- 1 bitcoin bitcoin  227 Apr  8 19:45 tls.key
+```
+NO!!!
+
 ## New conf files ##
 Create or update the files below.
 
@@ -170,11 +193,11 @@ autopilot.allocation=0.6
 ```
 </p></details>
 
-<details><summary>Click to see /home/bitcoin/.lnd/testnet3/lnd.conf</summary><p>
+<details><summary>Click to see /home/bitcoin/.lnd/lnd_testnet.conf</summary><p>
 
 ```bash
 # RaspiBolt LND Testnet: lnd configuration
-# /home/bitcoin/.lnd/testnet3/lnd.conf
+# /home/bitcoin/.lnd/lnd_testnet.conf
 
 [Application Options]
 debuglevel=info
@@ -275,7 +298,33 @@ WantedBy=multi-user.target
 <details><summary>Click to see /etc/systemd/system/lnd.service</summary><p>
   
 ```bash
-xxxx
+# RaspiBolt LND Mainnet: systemd unit for lnd
+# /etc/systemd/system/lnd.service
+
+[Unit]
+Description=LND Lightning Daemon
+Wants=bitcoind.service
+After=bitcoind.service
+
+# for use with sendmail alert
+#OnFailure=systemd-sendmail@%n
+
+[Service]
+# get var PUBIP from file
+EnvironmentFile=/run/publicip
+
+ExecStart=/usr/local/bin/lnd --configfile=/home/bitcoin/.lnd/lnd.conf --externalip=${PUBLICIP}:19735
+User=bitcoin
+Group=bitcoin
+LimitNOFILE=128000
+Type=simple
+KillMode=process
+TimeoutSec=180
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
 ```
 </p></details>
 
@@ -297,7 +346,7 @@ After=bitcoind.service
 # get var PUBIP from file
 EnvironmentFile=/run/publicip
 
-ExecStart=/usr/local/bin/lnd --datadir=/home/bitcoin/.lnd/testnet3 --externalip=${PUBLICIP}:19735
+ExecStart=/usr/local/bin/lnd   --configfile=/home/bitcoin/.lnd/lnd_testnet.conf --externalip=${PUBLICIP}:19735
 User=bitcoin
 Group=bitcoin
 LimitNOFILE=128000
@@ -309,7 +358,6 @@ RestartSec=60
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 </p></details>
 
