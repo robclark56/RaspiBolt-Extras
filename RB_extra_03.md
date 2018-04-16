@@ -15,9 +15,8 @@ After completing these instructions here, the 4 instances shown will be operatin
 
 1. [Open new firewall port](#open-new-firewall-port)
 1. [Shutdown existing services](#shutdown-existing-services)
-1. [Create new conf files](#new-conf-files)
-1. [Create new services](#new-services)
-1. [Open new firewall port](#open-new-firewall-port)
+1. [New conf files](#new-conf-files)
+1. [New services](#new-services)
 1. [Enable and start new services](#enable-and-start-new-services)
 1. [cli Aliases](#cli-aliases)
 1. [Optional] [Update the raspibolt System Overview utility](#update-the-raspibolt-system-overview-utility)
