@@ -28,6 +28,8 @@ $ ufw allow 19735  comment 'allow Lightning testnet'
 $ ufw status
 $ exit
 ```
+<details><summary>Click to expand</summary><p>
+  
 ```
 root@RaspiBolt:/home/admin# ufw status
 Status: active
@@ -44,6 +46,9 @@ To                         Action      From
 18333 (v6)                 ALLOW       Anywhere (v6)              # allow Bitcoin testnet
 19735 (v6)                 ALLOW       Anywhere (v6)              # allow Lightning (testnet)
 ```
+</p>
+</details>
+
 
 2. Open new port in Router
 
@@ -72,8 +77,10 @@ Create or update these 4 files.
 `admin ~  ฿  sudo nano /home/bitcoin/.bitcoin/bitcoin.conf`
 
 Note: Change PASSWORD_[B] to your PASSWORD_[B]
-```
 
+<details><summary>Click to see /home/bitcoin/.bitcoin/bitcoin.conf</summary><p>
+
+```
 # RaspiBolt LND  bitcoind configuration
 # /home/bitcoin/.bitcoin/bitcoin.conf
 
@@ -97,6 +104,7 @@ maxmempool=50
 maxconnections=40
 maxuploadtarget=5000
 ```
+</p></details>
 
 `admin ~  ฿  sudo nano /home/bitcoin/.bitcoin/testnet3/bitcoin.conf`
 
