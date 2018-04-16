@@ -2,8 +2,10 @@
 
 UNDER CONSTRUCTION
 # Introduction #
-There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one RaspiBolt. These instrictions assume you have a working RaspiBolt running in Testnet mode.
+There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one RaspiBolt. These instructions assume you have a working RaspiBolt running in Testnet mode.
 
+# An image to make things clearer #
+![images/RBD_01.]()
 # Summary of Changes Needed #
 This table shows the state we need to get to so the two lnd instances do not clash. 
 
