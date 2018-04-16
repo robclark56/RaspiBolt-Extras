@@ -68,11 +68,7 @@ admin ~  ฿  sudo systemctl disable lnd
 admin ~  ฿  sudo systemctl disable bitcoind
 ```
 ## New conf files ##
-Create or update these 4 files.
-1. /home/bitcoin/.bitcoin/bitcoin.conf
-1. /home/bitcoin/.bitcoin/testnet3/bitcoin.conf
-1. /home/bitcoin/.bitcoin/lnd????????.conf
-1. /home/bitcoin/.bitcoin/testnet3/bitcoin.conf
+Create or update the files below.
 
 The command to use is:
 
@@ -208,11 +204,7 @@ autopilot.allocation=0.6
 </p></details>
 
 ## New services ##
-Create or update these 4 files.
-1. bitcoind.service
-1. bitcoind_testnet.service
-1. lnd.service
-1. lnd_testnet.service
+Create or update the files below.
 
 The command to use is:
 
