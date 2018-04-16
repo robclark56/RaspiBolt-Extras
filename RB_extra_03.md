@@ -5,9 +5,24 @@ UNDER CONSTRUCTION
 There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one RaspiBolt. These instructions assume you have a working RaspiBolt running in Testnet mode.
 
 # An Diagram to make things clearer #
-![Image Ports](images/RaspiBoltDuo01.png)
+![Image Ports](images/RaspiBoltDuo02.png)
 
 After completing these instructions here, the 4 instances shown will be operating on the ports shown above. 
+
+# Overview #
+
+1. [Shutdown existing services](#shutdown-existing-services)
+1. [Create new conf files](#create-new-conf-files)
+1. [Create new services](#create-new-services)
+1. [Enable and start new services](#enable-and-start-new-services)
+1. [Optional] [Update the raspibolt System Overview utility](#update-the-raspibolt-system-overview-utility)
+
+## Shutdown existing services ##
+## Create new conf files ##
+## Create new services ##
+## Enable and start new services ##
+## Update the raspibolt System Overview utility ##
+
 
 # Summary of Changes Needed #
 This table shows the state we need to get to so the two lnd instances do not clash. 
