@@ -2,10 +2,10 @@
 
 UNDER CONSTRUCTION
 # Introduction #
-There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one RaspiBolt. These instructions assume you have a working RaspiBolt running in Testnet mode.
+There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running in Testnet or Mainnet mode.
 
 # A Diagram to make things clearer #
-![Image Ports](images/RaspiBoltDuo02.png)
+![Image Ports](images/RaspiBoltDuo01.png)
 
 After completing these instructions here, the 4 instances shown will be operating on the ports shown above. 
 
@@ -75,9 +75,9 @@ The command to use is:
 
 `admin ~  ฿  sudo nano <filename>`
 
-Don't forget to:
-* Change PASSWORD_[B] to your PASSWORD_[B] in the bitcoin.conf files
-* Edit this line as needed: *alias=YOUR_NAME [LND]* in the lnd.conf files
+Don't forget to Edit these lines as needed:
+* bitcoin.conf files: *rpcpassword=PASSWORD_[B]* 
+* lnd.conf files: *alias=YOUR_NAME [LND]* 
 
 <details><summary>Click to see /home/bitcoin/.bitcoin/bitcoin.conf</summary><p>
 
