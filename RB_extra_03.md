@@ -2,9 +2,18 @@
 
 UNDER CONSTRUCTION
 
+---
+
+# IMPORTANT ! #
+These instructions have NOT been tested in where the Raspibolt had existing Bitcoins in the mainnet wallet.
+
+Do not follow these instructions if unless your Raspibolt mainnet Bitcoin wallet and channel balances are zero - otherwise you may loose all those Bitcoins.
+
+---
+
 ![RaspiBoltDuo](images/RaspiBoltDuo.png)
 # Introduction #
-There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running in Testnet or Mainnet mode.
+There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running in Testnet mode.
 
 # A Diagram to make things clearer #
 ![Image Ports](images/RaspiBoltDuo01.png)
@@ -374,7 +383,7 @@ admin ~  ฿  sudo systemctl start lnd_testnet
 ```
 
 ## cli Aliases ##
-To simplify accessing the 4 deamons from the command line, setup these 4 aliases for the admin account.
+To simplify accessing the 4 daemons from the command line, setup these 4 aliases for the admin account.
 
 `admin ~  ฿  sudo nano /home/admin/.bash_aliases`
 ```bash
@@ -393,13 +402,13 @@ admin ~  ฿  bct getblockchaininfo
 ...
   "chain": "test",
 ...
-admin ~  ฿  lcm getinfo
+admin ~  ฿  lcm unlock
 ...
-"testnet": false,
+??
 ...
-admin ~  ฿  lct getinfo
+admin ~  ฿  lct unlock
 ...
- "testnet": true,
+?
 ...
 ```
 
