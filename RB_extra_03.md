@@ -447,6 +447,14 @@ This table shows the state we need to get to so the two lnd instances do not cla
 |||Security files|/home/bitcoin/.lnd<br>????|xx|
 
 
+????
+
+admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.key /home/bitcoin/.lnd/main/
+admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.cert /home/bitcoin/.lnd/main/
+admin ~  ฿
+
+
+
 `Use Password_[A]`
 
 admin ~  ฿  sudo adduser bitcoin_testnet
