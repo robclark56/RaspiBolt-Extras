@@ -451,7 +451,8 @@ This table shows the state we need to get to so the two lnd instances do not cla
 
 admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.key /home/bitcoin/.lnd/main/
 admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.cert /home/bitcoin/.lnd/main/
-admin ~  ฿
+admin ~  ฿ sudo cp -p /home/bitcoin/.lnd/admin.macaroon /home/bitcoin/.lnd/main/
+
 
 
 
