@@ -450,11 +450,16 @@ This table shows the state we need to get to so the two lnd instances do not cla
 ????
 
 ```
+sudo systemctl enable lnd.service
+sudo systemctl start lnd.service
+sudo systemctl status lnd.service
+
 admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.key /home/bitcoin/.lnd/main/
 admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.cert /home/bitcoin/.lnd/main/
 admin ~  ฿ sudo cp -p /home/bitcoin/.lnd/admin.macaroon /home/bitcoin/.lnd/main/
 sudo su bitcoin
-lncli --lnddir /home/bitcoin/.lnd/main create
+lncli --lnddir=/home/bitcoin/.lnd/main create
+lncli --lnddir=/home/bitcoin/.lnd/main unlock
 ```
 
 
