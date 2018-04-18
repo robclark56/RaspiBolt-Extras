@@ -26,3 +26,11 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 ---
 
+# Recieve LN Payments
+## Donations (sender decides) & Fixed Amounts (you decide)
+|<img src="images/xxx.png" alt="xxx">|The objective of this Extra is xxx.|
+|---|:--|
+4. [Payment Requests (a.k.a Invoices)](RB_extra_04.md)
+
+---
+
