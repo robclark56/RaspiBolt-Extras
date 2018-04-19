@@ -61,6 +61,7 @@ In this section the term WEB_ROOT refers to the directory on your web server hol
    * ```
      $ sudo wget https://raw.githubusercontent.com/robclark56/RaspiBolt-Extras/master/resources/ln_pr.css
      $ sudo wget https://raw.githubusercontent.com/robclark56/RaspiBolt-Extras/master/resources/ln_pr.php
+     $ sudo wget https://raw.githubusercontent.com/robclark56/RaspiBolt-Extras/master/resources/lightning.png
      ```
 1. Create or edit the files below. The command to use is:  `$  nano <filename>`
 
