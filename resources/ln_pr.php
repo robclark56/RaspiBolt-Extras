@@ -124,7 +124,7 @@ if($_POST){
          $label       = 'Pay with Card $';  
          echo ubwh_display_card_pay_button($cents_before_surcharge,$description,$label); 
        } else {
-        echo tep_draw_button('Pay with Card', 'glyphicon', null, 'primary', NULL, 'btn-success');
+        echo '<button type="submit" class="btn btn-success"> <span class="glyphicon"></span> Pay with Card</button>';
        } 
       ?>
       </div>
