@@ -32,7 +32,10 @@ Follow these instructions: [Auto Wallet Unlock](RB_extra_01.md), but make these 
    * Click to enable *Firewalls > Allow HTTP traffic*, and *Save*.
 1. Install Web Server (if needed). 
    * If your Host already has a Web server, ignore this step. 
-   * If you are using a GCP host, install a web server following [these instructions](https://cloud.google.com/compute/docs/tutorials/basic-webserver-apache).
+   * If you are using a GCP host:
+     1. install a web server following [these instructions](https://cloud.google.com/compute/docs/tutorials/basic-webserver-apache)
+     1. add PHP: `$ sudo apt install php7.0`
+
 1. Check lncli is working on your VM
    * ` $./run_lncli getinfo`
 1. Create run_lncli_invoice
@@ -49,6 +52,26 @@ Follow these instructions: [Auto Wallet Unlock](RB_extra_01.md), but make these 
      }
      ```
 
+
+
+
 ## Create Web Pages ##
-xxxxx
+In this section the term WEB_ROOT refers to the directory on your web server holding teh default index.html file. On a GCP instance, WEB_ROOT is '/var/www/html'
+
+1. Login to your Host, and change to WEB_ROOT
+   * e.g. `cd  /var/www/html`
+1. Create or edit the files below. The command to use is:  `$  nano <filename>`
+
+<details><summary>Click to see ln_pr.css</summary><p>
+
+```bash
+xxxx
+```
+</p></details>
+<details><summary>Click to see index.html</summary><p>
+
+```bash
+xxxx
+```
+</p></details>
 
