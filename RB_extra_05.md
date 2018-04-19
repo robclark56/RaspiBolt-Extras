@@ -1,7 +1,7 @@
-[All Extras](README.md) / Receive LN Payments
+[All Extras](README.md) / [Receive LN Payments](README.md#receive-ln-payments) / Live Payment Requests
 
 # Introduction #
-[Guide](RB_extra_04.mb) demonstated how to make one-time Payment Requests (PRs). This guide expands on that to have a Web site generate PRs on the fly.
+In [One-time Payment Requests](RB_extra_04.mb) it was demonstated how to make one-time Payment Requests (PRs). This guide expands on that to have a Web site generate PRs on the fly.
 
 Difficulty: Hard
 
