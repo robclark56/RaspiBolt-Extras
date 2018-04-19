@@ -7,7 +7,7 @@ Difficulty: Hard
 
 # Requirements #
 1. A working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md)
-1. A computer ("Host") under your control, that has  a web server with ability to run PHP scripts.
+1. A computer ("Host") under your control, that has  a web server with ability to run PHP scripts. In this guide, we will go through the steps on a Google Cloud Platform (CGP) virtual machine (VM), but you should perform similar steps on your Host.
 
 # Procedure #
 The overall steps are:
@@ -18,19 +18,13 @@ The overall steps are:
 Follow these instructions: [Auto Wallet Unlock](RB_extra_01.md), but make these changes
 
 1. Security: As you will not be storing any passwords on your Host that allow a hacker to *spend* funds in your wallet, you can ignore the secuity warnings. 
-1. Host: Ignore the instructions on creating and using Google Cloud Platform (GCP). Instead follow the instructions as they apply to your login account on your Host. 
-1. Download lnd release: You will have to identify the architecture of your Host, and then download the appropriate release file.
-1. Substitute *GCP External IP* and *GCP Username* with the *Your Host External IP* and *Your Host Account Username*.
-
-|Parameter|Your value|
-|--------------|---------------------|
-|Your Host External IP|__________________________________|
-|Your Host Acct Username|__________________________________|
-5. Do not:
+1. Host: If you already have a host computer, ignore the instructions on creating and using Google Cloud Platform (GCP). Instead follow the instructions as they apply to your login account on your Host. 
+1. Do not:
    * install expect
    * create the expect script (lnd_unlock.exp)
    * create the cron file (lnd_unlock)
-6. Copy the *invoice.macaroon* file to your Host. You can copy the readonly.macaroon if you want. Do *not* copy the admin.macaroon file to your Host  
+1. Install Web Server (if needed). If your Host already has a Web server, ignore this step. If you are using a GCP host, install a web server following [these instructions](https://cloud.google.com/compute/docs/tutorials/basic-webserver-apache).
+1. Copy the *invoice.macaroon* file to your Host. You can copy the readonly.macaroon if you want. Do *not* copy the admin.macaroon file to your Host  
   
 
 ## Create Web Pages ##
