@@ -1,11 +1,7 @@
 [All Extras](README.md) / Receive LN Payments
 
-UNDER CONSTRUCTION
-
----
-
 # Introduction #
-In this guide, you will create and display Payment Requests (PRs) so that you can recieve Lightning payments.
+In this guide, you will create and display Payment Requests (PRs) so that you can receive Lightning payments.
 
 All PRs have an *expiry* value, and that means it is not possible to create a PR with an infinite validity. The instructions below demonstrate the principals - but for a useful system, the PRs should be generated 'live' and then displayed to the customer.
 
@@ -21,9 +17,10 @@ In the steps below, *lncli* is used to generate the PR. If your lnd is currently
 # Procedure #
 
 * Login to your [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) as user *admin*
-* Create a Donation PR
-`admin ~  ฿  lncli addinvoice --memo 'Donation Payment request' --expiry 3600`
+
+* Create a Donation PR 
 ```bash
+admin ~  ฿  lncli addinvoice --memo 'Donation Payment request' --expiry 3600
 {
   "r_hash": "8bada7d5a4b8397524076396da0f13dcb400e6f304e5b4d3b9c60c3a2dbbd7c7",
   "pay_req": "lntb1pdd0e48pp53wk604dyhquh2fq8vwtd5rcnmj6qpehnqnjmf5aeccxr5tdm6lrsdp8g3hkuct5d9hkugzsv9uk6etwwss8yet3w4jhxaqcqzys8p04easl3lk5dld2yauq03akn5h5mehhjcm76jtw9w800nj8r5khv2qht7nlwa5jqhvzxcnf5shyxzjj5plz53n24f0fmjxldhlmzlsqv3mw9p"
@@ -44,7 +41,8 @@ admin ~  ฿  lncli decodepayreq "lntb1pdd0e48pp53wk604dyhquh2fq8vwtd5rcnmj6qpeh
     "cltv_expiry": "144"
 }
 ```
-* Generate the QR Code*
+* Generate the QR Code
+
 Visit [www.qr-code-generator.com](https://www.qr-code-generator.com/)
 
 Click the *Text* option at the top and paste your PR excluding the "" characters in the *Message* box and then click *Create QR Code*
@@ -53,8 +51,8 @@ Click the *Text* option at the top and paste your PR excluding the "" characters
 
 * Repeat for a Fixed Payment Amount of 1000000 satoshi
 
-`admin ~  ฿  lncli addinvoice --memo 'Fixed Payment Request' --expiry 3600 --amt 1000000`
 ```bash
+admin ~  ฿  lncli addinvoice --memo 'Fixed Payment Request' --expiry 3600 --amt 1000000
 {
         "r_hash": "4b5ac762bab887d5ee4033974cd612c558195d9ff59727948ca2b046189907e4",
         "pay_req": "lntb10m1pdd0m3npp5fddvwc46hzratmjqxwt5e4sjc4vpjhvl7ktj09yv52cyvxyeqljqdpzge5hsetyypgxz7tdv4h8ggzjv4ch2etnwscqzysxqrrss7wurln7cfcd4uvye65jssdpyk437kpk7qw5vc74v83dpstgyrvnhk9788kpn59yt47rl5tj247zuu3xas5e7pqm0m6wxr2c3trzk5vcq5wxxpg"
