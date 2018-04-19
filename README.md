@@ -26,9 +26,9 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 ---
 
-# Recieve LN Payments
+# Receive LN Payments
 ## Donations (sender decides) & Fixed Amounts (you decide)
-|<img src="images/xxx.png" alt="xxx">|The objective of this Extra is xxx.|
+|<img src="images/RBE-04-LN-QR_fixed.png" alt="QR" width="100" height="100">|The objective of this Extra is to demonstrate generating Payment Requests including QR codes.|
 |---|:--|
 4. [Payment Requests (a.k.a Invoices)](RB_extra_04.md)
 
