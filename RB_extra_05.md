@@ -19,17 +19,17 @@ Follow these instructions: [Auto Wallet Unlock](RB_extra_01.md), but make these 
 
 1. Security: As you will not be storing any passwords on your Host that allow a hacker to *spend* funds in your wallet, you can ignore the secuity warnings. 
 1. Host: Ignore the instructions on creating and using Google Cloud Platform (GCP). Instead follow the instructions as they apply to your login account on your Host. 
-1.Subsitute GCP External IP and GCP Username with the Your Host External IP and Your Host Account Username.
+1. Subsitute *GCP External IP* and *GCP Username* with the *Your Host External IP* and *Your Host Account Username*.
 
 |Parameter|Your value|
 |--------------|---------------------|
 |Your Host External IP|__________________________________|
 |Your Host Acct Username|__________________________________|
-3. Do not:
+4. Do not:
    * install expect
    * create the expect script (lnd_unlock.exp)
    * create the cron file (lnd_unlock)
-4. Copy the *invoice.macaroon* file to your Host. You can copy the readonly.macaroon if you want. Do *not* copy the admin.macaroon file to your Host  
+5. Copy the *invoice.macaroon* file to your Host. You can copy the readonly.macaroon if you want. Do *not* copy the admin.macaroon file to your Host  
   
 
 ## Create Web Pages ##
