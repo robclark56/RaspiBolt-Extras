@@ -17,15 +17,37 @@ The overall steps are:
 ## lnci on Host ##
 Follow these instructions: [Auto Wallet Unlock](RB_extra_01.md), but make these changes
 
-1. Security: As you will not be storing any passwords on your Host that allow a hacker to *spend* funds in your wallet, you can ignore the secuity warnings. 
+1. Security: As you will not be storing any passwords on your Host that allow a hacker to *spend* funds in your wallet, you can ignore the security warnings. 
 1. Host: If you already have a host computer, ignore the instructions on creating and using Google Cloud Platform (GCP). Instead follow the instructions as they apply to your login account on your Host. 
 1. Do not:
    * install expect
    * create the expect script (lnd_unlock.exp)
    * create the cron file (lnd_unlock)
-1. Install Web Server (if needed). If your Host already has a Web server, ignore this step. If you are using a GCP host, install a web server following [these instructions](https://cloud.google.com/compute/docs/tutorials/basic-webserver-apache).
-1. Copy the *invoice.macaroon* file to your Host. You can copy the readonly.macaroon if you want. Do *not* copy the admin.macaroon file to your Host  
+1. Do:
+   * Copy the *invoice.macaroon* file to your Host. You can copy the readonly.macaroon if you want. Do *not* copy the admin.macaroon file to your Host 
+1. Enable HTTP access. 
+   * Goto the GCP > Compute Engine > VM Instances page. 
+   * Click on the instance name to open the *VM instance details* page. 
+   * Click *Edit* (top of page). 
+   * Click to enable *Firewalls > Allow HTTP traffic*, and *Save*.
+1. Install Web Server (if needed). 
+   * If your Host already has a Web server, ignore this step. 
+   * If you are using a GCP host, install a web server following [these instructions](https://cloud.google.com/compute/docs/tutorials/basic-webserver-apache).
+1. Check lncli is working on your VM
+   * ` $./run_lncli getinfo`
+1. Create run_lncli_invoice
+   * `$ cp -p run_lncli run_lncli_invoice`
+1. Edit and save run_lncli_invoice to change one line
+   * `     --macaroonpath=$home_dir/.lnd/invoice.macaroon  \`
   
+1. Check run_lncli_invoice
+   * ```
+     $ ./run_lncli_invoice addinvoice
+     {
+        "r_hash": "33210b1e3b......2e8",
+        "pay_req": "lntb1pddsda......yvp"
+     }
+     ```
 
 ## Create Web Pages ##
 xxxxx
