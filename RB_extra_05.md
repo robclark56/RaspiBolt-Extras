@@ -14,7 +14,7 @@ The overall steps are:
 1. Install *lncli* on the Host computer, and configure it to connect to lnd running on your RaspiBolt
 1. Create web pages (HTTP) on the Host that retrieve a PR from the RaspiBolt, and then display on a web page.
 
-## lnci on Host ##
+## lncli on Host ##
 Follow these instructions: [Auto Wallet Unlock](RB_extra_01.md), but make these changes
 
 1. Security: As you will not be storing any passwords on your Host that allow a hacker to *spend* funds in your wallet, you can ignore the security warnings. 
