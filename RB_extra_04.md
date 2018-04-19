@@ -1,4 +1,4 @@
-[All Extras](README.md) / Receive LN Payments
+[All Extras](README.md) / [Receive LN Payments](README.md#receive-ln-payments) / One-time Payment Requests
 
 # Introduction #
 In this guide, you will create and display Payment Requests (PRs) so that you can receive Lightning payments.
