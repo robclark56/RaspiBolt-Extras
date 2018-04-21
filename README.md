@@ -33,7 +33,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 
 
-4. [Enable and Use REST with lnd](RB_extra_REST.md)
+4. [Enable and Use REST with lnd](RBE_REST.md)
 
 # Receive LN Payments
 ## Donations (sender decides) & Fixed Amounts (you decide)
