@@ -70,11 +70,11 @@ admin ~  ฿  openssl x509 -in /home/bitcoin/.lnd/tls.cert -text -noout
 ```
 You should see 0.0.0.0 in the result
 
-```
+``` 
 X509v3 Subject Alternative Name:
-    DNS:RaspiBolt, DNS:localhost, DNS:my.fqdn, 
-    IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1, IP Address:192.168.0.141, 
-    IP Address:FE80:0:0:0:2481:BA24:A7E5:3DA1
+    DNS:RaspiBolt, DNS:localhost, IP Address:127.0.0.1, 
+    IP Address:0:0:0:0:0:0:0:1, IP Address:192.168.0.141, IP Address:FE80:0:0:0:2481:BA24:A7E5:3DA1, 
+    IP Address:0.0.0.0
 ```
 
 * Copy the TLS cert to user admin
