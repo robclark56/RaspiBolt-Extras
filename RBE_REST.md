@@ -53,7 +53,7 @@ I consider it a bug that REST access is either *None* or *World* as a security b
 
 ```
 [Application Options]
-restlisten=0.0.0.0:8081
+restlisten=0.0.0.0:8080
 tlsextraip=0.0.0.0
 
 ```
