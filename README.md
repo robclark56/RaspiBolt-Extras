@@ -28,7 +28,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 # Enabling REST Access
 ## By default, the powerful REST access is disabled
-|<img src="images/RBE-REST.jpg" alt="REST">|The objective of this Extra is to enable and demonstrate using the REST interface instead of rpc/lncli.|
+|<img src="images/RBE_REST.jpg" alt="REST">|The objective of this Extra is to enable and demonstrate using the REST interface instead of rpc/lncli.|
 |---|:--|
 
 
