@@ -1,7 +1,5 @@
 [All Extras](README.md) / Enable and use REST with lnd - WAN
 
-UNDER CONSTRUCTION
-
 # Introduction #
 These instructions demonstrate how to use the lnd REST interface from a host outside the local LAN.
 
