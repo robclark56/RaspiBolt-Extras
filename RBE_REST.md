@@ -58,7 +58,6 @@ admin ~  ฿ lncli getinfo
 {"identity_pubkey":"022e...1ecdb56c5941020d4",....,"best_header_timestamp":"1524352102"}
 
 admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://your.LAN.ip.address:8080/v1/getinfo
-
 {"identity_pubkey":"022e...1ecdb56c5941020d4",....,"best_header_timestamp":"1524352102"}
 ```
 
