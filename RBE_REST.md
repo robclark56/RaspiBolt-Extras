@@ -38,8 +38,6 @@ Add/Change the lines as shown, replacing `your.LAN.ip.address`
 [Application Options]
 rpclisten=localhost:10009
 rpclisten=your.LAN.ip.address:10009
-rpclisten=192.168.0.141:10009
-
 restlisten=your.LAN.ip.address:8080
 ```
 ## Restart lnd  and Unlock Wallet ##
