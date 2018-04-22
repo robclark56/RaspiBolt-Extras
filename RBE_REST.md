@@ -37,7 +37,7 @@ Compare that with rpc access.
 |Everything|No|Yes|
 
 ## Bug? ##
-I consider it a bug that REST access is either *None* or *World* as a security bug. See [lnd issues 694](https://github.com/lightningnetwork/lnd/issues/684)
+I consider it a security bug that REST access is either *None* or *World* . See [lnd issues 694](https://github.com/lightningnetwork/lnd/issues/684)
 
 # Procedure #
 
@@ -96,14 +96,14 @@ admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -
 ## Create a Payment Request ##
 (Equivalent to *lncli addinvoice --memo test --amt 100000*)
 ```
-admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://127.0.0.1:8081/v1/invoices -d '{"memo":"test","value":"100000"}'
+admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://127.0.0.1:8080/v1/invoices -d '{"memo":"test","value":"100000"}'
 {"r_hash":"VIel04YP3YcFmBy82VMCJiUgdRLw7eyi6uk9Ee/jDBQ=",
  "payment_request":"lntb.....rfez"
  }
 ```
 Now decode it (Equivalent to *lncli decodepayreq xxxx*)
 ```
-admin ~  ฿  sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://127.0.0.1:8081/v1/payreq/lntb.....rfez
+admin ~  ฿  sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://127.0.0.1:8080/v1/payreq/lntb.....rfez
 
 {"destination":"022ecebcf3c95f39934b30d7d56c42d2fa1b110054f6672301ecdb56c5941020d4",
  "payment_hash":"5487a5d3860fdd8705981cbcd953022625207512f0edeca2eae93d11efe30c14",
