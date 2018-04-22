@@ -104,10 +104,10 @@ MyWanHost $: ls -la invoice.macaroon
    
 # Test - using cli on WAN Host #
 
-Replace XXXX with either my.ip.address OR my.fqdn - must be same as tlsextraip or tlsextradomain in lnd.conf
+Replace CHANGE_ME with either my.ip.address OR my.fqdn - must be same as tlsextraip or tlsextradomain in lnd.conf
 
 ```
-MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_macaroon.base64)"   https://XXXX:8080/v1/invoices -d '{"memo":"test","value":"100000"}'
+MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_macaroon.base64)"   https://CHANGE_ME:8080/v1/invoices -d '{"memo":"test","value":"100000"}'
 
 {"r_hash":"nNOovBr33sTBWxH8qjUhHQvkxZBFEAYCXUgV8s2Z684=",
   "payment_request":"lntb1m1p...wn"
