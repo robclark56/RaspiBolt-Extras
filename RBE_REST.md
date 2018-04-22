@@ -62,7 +62,7 @@ admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -
 admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://your.LAN.ip.address:8080/v1/invoices -d '{"memo":"test","value":"100000"}'
 {"r_hash":"VIel04YP3YcFmBy82VMCJiUgdRLw7eyi6uk9Ee/jDBQ=",
  "payment_request":"lntb.....rfez"
- }
+}
 ```
 Now decode it (Equivalent to *lncli decodepayreq xxxx*)
 
