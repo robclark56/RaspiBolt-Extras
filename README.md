@@ -26,21 +26,19 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 ---
 
-# Enabling REST Access
-## By default, the powerful REST access is disabled
+# Enabling REST Access #
 |<img src="images/RBE_REST.jpg" alt="REST">|The objective of this Extra is to enable and demonstrate using the REST interface instead of rpc/lncli.|
 |---|:--|
 
-
-
-4. [Enable and Use REST with lnd](RBE_REST.md)
+4. [Enable and Use REST with lnd - LAN](RBE_REST.md)
+5. [Enable and Use REST with lnd - WAN](RBE_REST_WAN.md)
 
 # Receive LN Payments
 ## Donations (sender decides) & Fixed Amounts (you decide)
 |<img src="images/RBE-04-LN-QR_fixed.png" alt="QR" width="100" height="100">|The objective of this Extra is to demonstrate generating Payment Requests including QR codes.|
 |---|:--|
-5. [One-Time Payment Requests (a.k.a Invoices)](RB_extra_04.md)
-6. [Live Payment Requests (a.k.a Invoices)](RB_extra_05.md): (Requires web server).
+6. [One-Time Payment Requests (a.k.a Invoices)](RB_extra_04.md)
+7. [Live Payment Requests (a.k.a Invoices)](RB_extra_05.md): (Requires web server).
 
 ---
 
