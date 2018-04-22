@@ -35,7 +35,7 @@ Subsitute WAN_HOST_External_IP with your WAN Host External IP
 
 ```
 admin ~  ฿  sudo su
-root@RaspiBolt:/home/admin# ufw allow from WAN_HOST_External_IP to any port 8080 comment 'allow REST from WAN Host'
+root@RaspiBolt:/home/admin# ufw allow to any port 8080 comment 'allow REST from WAN'
 root@RaspiBolt:/home/admin# exit
 ```
 
