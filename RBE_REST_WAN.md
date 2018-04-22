@@ -19,8 +19,7 @@ You must have successfully completed [Enable and use REST with lnd - WAN](RBE_RE
 
 * Determine IP addresses
 
-
-
+Compete this table.
 
 |`__________Host__________`|`___________`Value____________   |
 |--|:-------------------------------|
@@ -83,26 +82,30 @@ admin ~  ฿  sudo cp /home/bitcoin/.lnd/tls.cert /home/admin/.lnd
 admin ~  ฿  sudo chown -R admin:admin /home/admin/.lnd
 ```
 
-# Upload Macroon to Host #
-Different Macaroons permit the WAN Host to perform different tasks. See [this file](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_66_remote_lncli.md) for full details. In this exercise, we will upload the *invoice.macaroon*.
+# Create Macroon file on Host #
+Different Macaroons permit the WAN Host to perform different tasks. See [this file](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_66_remote_lncli.md) for full details. In this exercise, we will use the *invoice.macaroon*.
 
-* Get ascii veersion of the macaroon file
+* Get ascii version of the macaroon file
 ```
+admin ~  ฿  ls -la /home/bitcoin/.lnd/invoice.macaroon
 admin ~  ฿  xxd -ps -u -c 1000  /home/bitcoin/.lnd/invoice.macaroon
 
 0201036C6.....7377C49EE
 ```
 
-* Create macroon file on WAN Host
-
-   * Login to the Command Prompt of your WAN Host
-   * Create macaroon file
-   Copy to your clipboard the output from xxd in the step above
-   
+* Login to the Command Prompt of your WAN Host
+* RaspiBolt: Copy to your clipboard the output from xxd in the step above
+* WAN Host: Paste it into the command below
 ```
 MyWanHost $: echo '0201036C6.....7377C49EE' > invoice_macaroon.base64
 ```
-
+* Convert invoice_macaroon.base64 into invoice.macaroon
+```
+MyWanHost $: xxd -r -p  invoice_macaroon.base64 invoice.macaroon
+MyWanHost $: ls -la invoice.macaroon
+```
+* Confirm size in bytes of *invoice.macaroon* is same on RaspiBolt and WAN Host
+   
 # Test #
 Edit and save this file on your WAN Host
 
