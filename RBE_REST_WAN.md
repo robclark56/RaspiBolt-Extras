@@ -81,7 +81,7 @@ admin ~  ฿  sudo chown -R admin:admin /home/admin/.lnd
 ```
 
 # Create Macroon file on Host #
-Different Macaroons permit the WAN Host to perform different tasks. See [this file](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_66_remote_lncli.md) for full details. In this exercise, we will use the *invoice.macaroon*.
+Different Macaroons permit the WAN Host to perform different tasks. See the end of [this file](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_66_remote_lncli.md) for full details. In this exercise, we will use the *invoice.macaroon*.
 
 * Get ASCII version of the macaroon file
 ```
@@ -117,7 +117,7 @@ MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_ma
 ```
 
 # Test - using PHP on WAN Host #
-Edit and save this file on your WAN Host. Change the two values near the top of the file.
+Edit and save this file on your WAN Host. Change the two CHANGE_ME values near the top of the file.
 <details><summary>Click to see public_html/lnd.php</summary><p>
 
 ```php
@@ -185,6 +185,7 @@ $fixed    = getPaymentRequest('Fixed Payment',100000);
 </html>
 ```
 </p></details>
+
 
 To see this in action, open `http://your.web.server/lnd.php`
 
