@@ -3,7 +3,7 @@
 # Introduction #
 There are two interfaces allowing interaction with an lnd instance:
 
-1. rpc: Used by lncli and the best documented.
+1. rpc: Used by lncli.
 2. REST: Uses a web-style access (`http://my.raspibolt/so/something?parameter=value`).
 
 Difficulty: Easy
