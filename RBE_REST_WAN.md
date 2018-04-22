@@ -11,19 +11,20 @@ Difficulty: Moderate
 You will need access to a host on the Internet (*WAN Host*) that can run [cURL](https://en.wikipedia.org/wiki/CURL). In these instructions, cURL will be run from a PHP script running on web server. But you could do the same from a command line.
 
 # Prerequisite #
-You must have successfully completed [Enable and use REST with lnd - WAN](RBE_REST.md).
+You must have successfully completed [Enable and use REST with lnd - LAN](RBE_REST.md).
 
 # Modify local firewall and port forwarding #
 
-* Add a new Port Forward to your RaspiBolt for port 8080 on your router. See [Rasberry Pi](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_20_pi.md)
+ * Add a new Port Forward on your router allowing internet traffic to port 8080 through to your RaspiBolt. 
+    * See [Rasberry Pi](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_20_pi.md)
 
-* Determine IP addresses
+* Determine IP address
 
 Compete this table.
 
 |`__________Host__________`|`___________`Value____________   |
 |--|:-------------------------------|
-|RaspiBolt External IP|                |
+|RaspiBolt External Static IP|                |
 |RaspiBolt External FQDN (optional)||
 
 * login as admin to your RaspiBolt
@@ -104,7 +105,6 @@ MyWanHost $: ls -la invoice.macaroon
 * Confirm size in bytes of *invoice.macaroon* is same on RaspiBolt and WAN Host
    
 # Test - using cli on WAN Host #
-Edit and save this file on your WAN Host
 
 Replace XXXX with either my.ip.address OR my.fqdn - must be same as tlsextraip or tlsextradomain in lnd.conf
 
@@ -117,7 +117,7 @@ MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_ma
 ```
 
 # Test - using PHP on WAN Host #
-Edit and save this file on your WAN Host
+Edit and save this file on your WAN Host. Change the two values near the top of the file.
 <details><summary>Click to see public_html/lnd.php</summary><p>
 
 ```php
@@ -135,15 +135,14 @@ Edit and save this file on your WAN Host
 */
 
 function getPaymentRequest($memo='',$satoshi=0){
- $lnd_ip         ='robertfclark.no-ip.biz';
- $lnd_port       ='8081';
- $macaroon_base64='0201036C6E640247030A10ABC4FF67DFB33CAC36C20321728AB1D11201301A160A0761646472657373120472656164120577726974651A170A08696E766F696365731204726561641205777269746500000620A494F88CF81E613CA4440001851AEA0B587BC9579081582EAE0C14B7377C49EE';
+ $lnd_port       ='8080';
+ $lnd_ip         ='CHANGE_ME';
+ $macaroon_base64='CHANGE_ME';  #Contents of invoice_macaroon.base64
  
  $data = json_encode(array("memo"  => $memo,
                            "value" => "$satoshi"
                          )     
-                    );            
-                    
+                    );                             
  $ch = curl_init("https://$lnd_ip:$lnd_port/v1/invoices");
  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
  curl_setopt($ch, CURLOPT_POST, 1);
