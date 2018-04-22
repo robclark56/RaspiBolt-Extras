@@ -25,13 +25,10 @@ Compete this table.
 |--|:-------------------------------|
 |RaspiBolt External IP|                |
 |RaspiBolt External FQDN (optional)||
-|WAN Host External IP||
 
 * login as admin to your RaspiBolt
 
-* Allow REST from your WAN Host in the RaspiBolt firewall
-
-Subsitute WAN_HOST_External_IP with your WAN Host External IP
+* Allow REST in the RaspiBolt firewall
 
 ```
 admin ~  ฿  sudo su
