@@ -8,9 +8,9 @@ These instructions demonstrate how to use the lnd REST interface from a host out
 Difficulty: Moderate
 
 # Requirements #
-You will need access to a host on the Internet (*WAN Host*) that can run [cURL](https://en.wikipedia.org/wiki/CURL). In these instructions, cURL will be run from a PHP script running on web server. But you could do the same from a Linux command line.
+You will need access to a host on the Internet (*WAN Host*) that can run [cURL](https://en.wikipedia.org/wiki/CURL). In these instructions, cURL will be run from a PHP script running on web server. But you could do the same from a command line.
 
-# Pre-Requisite #
+# Prerequisite #
 You must have successfully completed [Enable and use REST with lnd - WAN](RBE_REST.md).
 
 # Modify local firewall and port forwarding #
@@ -186,3 +186,6 @@ $fixed    = getPaymentRequest('Fixed Payment',100000);
 </html>
 ```
 </p></details>
+
+To see this in action, open `http://your.web.server/lnd.php`
+
