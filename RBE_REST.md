@@ -99,6 +99,8 @@ admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -
  }
 ```
 Now decode it (Equivalent to *lncli decodepayreq xxxx*)
+
+Substitute the full payment request string from above into the command below.
 ```
 admin ~  ฿  sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://127.0.0.1:8080/v1/payreq/lntb.....rfez
 
