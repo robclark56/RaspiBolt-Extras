@@ -17,7 +17,7 @@ Difficulty: Easy
 * Easy to use from programming languages such as PHP.
 
 # WARNING #
-As of lnd V 0.4.1 beta, REST behaviour id affected buy the value of the *rpclisten* value in lnd.conf. For this reason, *rpclisten* will be set in these instructions.
+As of lnd V 0.4.1 beta, REST behaviour is affected by the value of the *rpclisten* value in lnd.conf. For this reason, *rpclisten* will also be set in these instructions.
 
 # Procedure #
 
@@ -32,13 +32,17 @@ admin ~  ฿  ifconfig
 ```
 
 * Edit and save the lnd.conf file with the changes shown.
-   * Add/Change the rpclisten & restlisten lines as shown
+
+Add/Change the lines as shown, replacing `your.LAN.ip.address`
 
 `admin ~  ฿  sudo nano /home/bitcoin/.lnd/lnd.conf`
 
 ```
 [Application Options]
+rpclisten=localhost:10009
 rpclisten=your.LAN.ip.address:10009
+rpclisten=192.168.0.141:11009
+
 restlisten=your.LAN.ip.address:8080
 ```
 ## Restart lnd  and Unlock Wallet ##
@@ -48,8 +52,12 @@ admin ~  ฿  lncli unlock
 ```
 
 ## Test ##
+Replace `your.LAN.ip.address`
 ```
-admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://127.0.0.1:8080/v1/getinfo
+admin ~  ฿ lncli getinfo
+{"identity_pubkey":"022e...1ecdb56c5941020d4",....,"best_header_timestamp":"1524352102"}
+
+admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://your.LAN.ip.address:8080/v1/getinfo
 
 {"identity_pubkey":"022e...1ecdb56c5941020d4",....,"best_header_timestamp":"1524352102"}
 ```
@@ -57,7 +65,7 @@ admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -
 ## Create a Payment Request ##
 (Equivalent to *lncli addinvoice --memo test --amt 100000*)
 ```
-admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://127.0.0.1:8080/v1/invoices -d '{"memo":"test","value":"100000"}'
+admin ~  ฿ sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"   https://your.LAN.ip.address:8080/v1/invoices -d '{"memo":"test","value":"100000"}'
 {"r_hash":"VIel04YP3YcFmBy82VMCJiUgdRLw7eyi6uk9Ee/jDBQ=",
  "payment_request":"lntb.....rfez"
  }
