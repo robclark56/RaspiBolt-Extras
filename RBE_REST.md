@@ -1,4 +1,4 @@
-[All Extras](README.md) / Enable and use REST with lnd -LAN
+[All Extras](README.md) / Enable and use REST with lnd - LAN
 
 # Introduction #
 There are two interfaces allowing interaction with an lnd instance:
