@@ -1,8 +1,5 @@
 [All Extras](README.md) / Enable and use REST with lnd
 
-UNDER CONSTRUCTION !!!!
-
-
 # Introduction #
 There are two interfaces allowing interaction with an lnd instance:
 
