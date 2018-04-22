@@ -14,7 +14,7 @@ Difficulty: Easy
 * Easy to use from programming languages such as PHP.
 
 # LND Default Denies All REST Access #
-As I write this (lnd V 0.4.1 beta) there are only two modes for REST access.
+As I write this (lnd V 0.4.1 beta) there are only two modes for REST access: *None* or *World*. I consider this a security bug. See also [lnd issues 694](https://github.com/lightningnetwork/lnd/issues/684)
 
 |REST Access From Only ...|Default|Possible?|
 |--|--|--|
@@ -35,9 +35,6 @@ Compare that with rpc access.
 |WAN - specific host|No|Yes|
 |WAN - all hosts|No|Yes|
 |Everything|No|Yes|
-
-## Bug? ##
-I consider it a security bug that REST access is either *None* or *World* . See [lnd issues 694](https://github.com/lightningnetwork/lnd/issues/684)
 
 # Procedure #
 
