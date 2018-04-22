@@ -118,8 +118,8 @@ MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_ma
 
 # Test - using PHP on WAN Host #
 Edit and save this file on your WAN Host
-
-```php
+<details><summary>Click to see public_html/lnd.php</summary><p>
+```
 <?php
 /*
 *  Example PHP file to get a Payment Request from an lnd instance on a different host
@@ -184,3 +184,4 @@ $fixed    = getPaymentRequest('Fixed Payment',100000);
 </body>
 </html>
 ```
+</p></details>
