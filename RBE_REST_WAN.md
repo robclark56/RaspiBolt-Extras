@@ -106,9 +106,20 @@ MyWanHost $: ls -la invoice.macaroon
 ```
 * Confirm size in bytes of *invoice.macaroon* is same on RaspiBolt and WAN Host
    
-# Test #
+# Test - using cli on WAN Host #
 Edit and save this file on your WAN Host
 
+Replace XXXX with either my.ip.address OR my.fqdn - must be same as tlsextraip or tlsextradomain in lnd.conf
+
 ```
-MyWanHost $:
+MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_macaroon.base64)"   https://XXXX:8080/v1/invoices -d '{"memo":"test","value":"100000"}'
+
+{"r_hash":"nNOovBr33sTBWxH8qjUhHQvkxZBFEAYCXUgV8s2Z684=",
+  "payment_request":"lntb1m1p...wn"
+}
 ```
+
+# Test - using PHP on WAN Host #
+Edit and save this file on your WAN Host
+
+[tba]
