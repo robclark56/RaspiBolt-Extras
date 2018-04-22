@@ -5,7 +5,7 @@ UNDER CONSTRUCTION
 # Introduction #
 These instructions demonstrate how to use the lnd REST interface from a host outside the local LAN.
 
-Difficulty: Easy
+Difficulty: Moderate
 
 # Requirements #
 You will need access to a host on the Internet (*WAN Host*) that can run [cURL](https://en.wikipedia.org/wiki/CURL). In these instructions, cURL will be run from a PHP script running on web server. But you could do the same from a Linux command line.
@@ -86,7 +86,26 @@ admin ~  ฿  sudo chown -R admin:admin /home/admin/.lnd
 # Upload Macroon to Host #
 Different Macaroons permit the WAN Host to perform different tasks. See [this file](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_66_remote_lncli.md) for full details. In this exercise, we will upload the *invoice.macaroon*.
 
-xxx
+* Get ascii veersion of the macaroon file
+```
+admin ~  ฿  xxd -ps -u -c 1000  /home/bitcoin/.lnd/invoice.macaroon
+
+0201036C6.....7377C49EE
+```
+
+* Create macroon file on WAN Host
+
+   * Login to the Command Prompt of your WAN Host
+   * Create macaroon file
+   Copy to your clipboard the output from xxd in the step above
+   
+```
+MyWanHost $: echo '0201036C6.....7377C49EE' > invoice_macaroon.base64
+```
 
 # Test #
-xxx
+Edit and save this file on your WAN Host
+
+```
+MyWanHost $:
+```
