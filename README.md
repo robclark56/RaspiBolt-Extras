@@ -44,3 +44,6 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 ---
 
+|![Busy Programmer](images/RaspiBoltBusy.jpg)|Like these Guides? [Donate](RBE_donation.md) some satoshis.|
+|--|--|
+
