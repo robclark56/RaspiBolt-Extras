@@ -16,7 +16,7 @@ Do not follow these instructions if unless your Raspibolt mainnet Bitcoin wallet
 There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running in Testnet mode.
 
 # A Diagram to make things clearer #
-![Image Ports](images/RaspiBoltDuo01.png)
+![Image Ports](images/RaspiBoltDuo02.png)
 
 After completing these instructions here, the 4 instances shown will be operating on the ports shown above. 
 
