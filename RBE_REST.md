@@ -83,6 +83,10 @@ admin ~  ฿  sudo curl --insecure  --header "Grpc-Metadata-macaroon: $(xxd -ps 
 # List of REST Commands #
 See [REST API](https://github.com/ndeet/php-ln-lnd-rest/tree/master/docs/Api)
 
+---
+
+|![Busy Programmer](images/RaspiBoltBusy.jpg)|Like these Guides? [Donate](RBE_donation.md) some satoshis.|
+|--|--|
 
 
 
