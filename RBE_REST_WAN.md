@@ -119,3 +119,7 @@ Create [lnd.php](resources/lnd.php) on your WAN Host. Change the two CHANGE_ME v
 
 To see this in action, open `http://your.web.server/lnd.php`
 
+---
+
+|![Busy Programmer](images/RaspiBoltBusy.jpg)|Like these Guides? [Donate](RBE_donation.md) some satoshis.|
+|--|--|
