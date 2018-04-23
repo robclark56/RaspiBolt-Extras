@@ -27,8 +27,7 @@ There is no reason that you can not run both mainnet & testnet lnd instances at 
 |sudo nano ~bitcoin/.lnd/lnd.conf|[Bitcoin]<br>bitcoin.mainnet=1|[Bitcoin]<br>bitcoin.mainnet=0|
 |sudo systemctl stop bitcoind|
 |sudo systemctl status bitcoind|
-|sudo tail -f ~bitcoin/.bitcoin/debug.log<br>(exit with Ctrl-C)|
-|Wait until blockchain fully synced ...|
+|sudo tail -f ~bitcoin/.bitcoin/debug.log<br>Wait until blockchain fully synced ...<br>... progress=1.000000  ...<br>(exit with Ctrl-C)|
 |sudo systemctl stop lnd|
 |sudo systemctl status lnd|
 |sudo journalctl -f -u lnd<br>(exit with Ctrl-C)|
