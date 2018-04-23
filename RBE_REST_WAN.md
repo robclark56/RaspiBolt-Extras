@@ -115,75 +115,7 @@ MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_ma
 ```
 
 # Test - using PHP on WAN Host #
-Edit and save this file on your WAN Host. Change the two CHANGE_ME values near the top of the file.
-<details><summary>Click to see public_html/lnd.php</summary><p>
-
-```php
-<?php
-/*
-*  Example PHP file to get a Payment Request from an lnd instance on a different host
-
-   See: https://github.com/robclark56/RaspiBolt-Extras/blob/master/RBE_REST_WAN.md
-   
-   Feel free to copy and use
-   
-   See this link to learn the full LND REST API: 
-      https://github.com/ndeet/php-ln-lnd-rest/tree/master/docs/Api
-
-*/
-
-function getPaymentRequest($memo='',$satoshi=0){
- $lnd_port       ='8080';
- $lnd_ip         ='CHANGE_ME';
- $macaroon_base64='CHANGE_ME';  #Contents of invoice_macaroon.base64
- 
- $data = json_encode(array("memo"  => $memo,
-                           "value" => "$satoshi"
-                         )     
-                    );                             
- $ch = curl_init("https://$lnd_ip:$lnd_port/v1/invoices");
- curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
- curl_setopt($ch, CURLOPT_POST, 1);
- curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
- curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
- curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    "Grpc-Metadata-macaroon: $macaroon_base64"
-    ));
- $response = curl_exec($ch);
- curl_close($ch);
-
- $PR = json_decode($response);
- return $PR->payment_request;
-}
-
-$donation = getPaymentRequest('Donation');
-$fixed    = getPaymentRequest('Fixed Payment',100000);
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Example LND Payment Request</title>
-</head>
-
-<body>
-
-<h3>Payment Request - Donation</h3>
-<?php echo $donation;?>
-<br>
-<img src="http://qrickit.com/api/qr.php?qrsize=200&d=<?php echo $donation;?>">
-
-<h3>Payment Request - Fixed Amount</h3>
-<?php echo $fixed;?>
-<br>
-<img src="http://qrickit.com/api/qr.php?qrsize=200&d=<?php echo $fixed;?>">
-
-</body>
-</html>
-```
-</p></details>
-
+Create [lnd.php](resources/lnd.php) on your WAN Host. Change the two CHANGE_ME values near the top of the file.
 
 To see this in action, open `http://your.web.server/lnd.php`
 
