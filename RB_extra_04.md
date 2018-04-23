@@ -78,7 +78,7 @@ admin ~  ฿  lncli decodepayreq "lntb10m1pdd.....rzk5vcq5wxxpg"
 
 ---
 
-|![Busy Programmer](images/RaspiBoltBusy.jpg)|Like these Guides? [Donate](RBE_donate.md) some satoshis.|
+|![Busy Programmer](images/RaspiBoltBusy.jpg)|Like these Guides? [Donate](RBE_donation.md) some satoshis.|
 |--|--|
 
 
