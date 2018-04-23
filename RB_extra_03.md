@@ -17,17 +17,21 @@ There is no reason that you can not run both mainnet & testnet lnd instances at 
 
 ## Switching between mainnet and testnet with normal RaspiBolt ##
 
-|Switch to mainnet|Switch to testnet|
-|--|--|
-|login as admin|login as admin|
-|cd /home/admin|cd /home/admin|
-|sudo systemctl stop lnd|sudo systemctl stop lnd|
-|sudo systemctl stop bitcoind|sudo systemctl stop bitcoind|
-|sudo nano ~bitcoin/.bitcoin/bitcoin.conf<br>testnet=0|sudo nano ~bitcoin/.bitcoin/bitcoin.conf<br>testnet=1|
-|sudo nano ~bitcoin/.lnd/lnd.conf<br>bitcoin.mainnet=1|sudo nano ~bitcoin/.lnd/lnd.conf<br>bitcoin.mainnet=0|
-|sudo systemctl stop bitcoind|sudo systemctl start bitcoind|
-|Wait until blockchain fully synced ...|Wait until blockchain fully synced ...|
-|sudo systemctl stop lnd|sudo systemctl start lnd|
+|Chain|mainnet|testnet|
+|--|--|--|
+|login as admin|
+|cd /home/admin|
+|sudo systemctl stop lnd|
+|sudo systemctl stop bitcoind|
+|sudo nano ~bitcoin/.bitcoin/bitcoin.conf|testnet=0|testnet=1|
+|sudo nano ~bitcoin/.lnd/lnd.conf|[Bitcoin]<br>bitcoin.mainnet=1|[Bitcoin]<br>bitcoin.mainnet=0|
+|sudo systemctl stop bitcoind|
+|sudo systemctl status bitcoind|
+|sudo tail -f ~bitcoin/.bitcoin/debug.log<br>(exit with Ctrl-C)|
+|Wait until blockchain fully synced ...|
+|sudo systemctl stop lnd|
+|sudo systemctl status lnd|
+|sudo journalctl -f -u lnd<br>(exit with Ctrl-C)|
 
 
 # A Diagram to make things clearer #
