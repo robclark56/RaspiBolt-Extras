@@ -38,7 +38,7 @@ There is no reason that you can not run both mainnet & testnet lnd instances at 
 
 # A Diagram to make things clearer #
 After completing these instructions here, the 4 instances shown will be operating on the ports shown below.
-![Image Ports](images/RaspiBoltDuo02.png)
+![Image Ports](images/RaspiBoltDuo01.png)
 
 ## File Locations ##
 
