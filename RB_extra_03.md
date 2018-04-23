@@ -20,6 +20,15 @@ There is no reason that you can not run both mainnet & testnet lnd instances at 
 
 After completing these instructions here, the 4 instances shown will be operating on the ports shown above. 
 
+## File Locations ##
+All locations are with respect to */home/bitcoin/*
+
+||Mainnet|Mainnet|Testnet|Testnet|
+|---|---|---|---|---|
+|instance|bitcoind|lnd|bitcoind|lnd|
+|data root|.bitcoin|.lnd/main|.bitcoin/testnet3|.lnd/data|
+|conf file|.bitcoin/bitcoin.conf|.lnd/lnd.conf|.bitcoin/testnet3/bitcoin.conf|.lnd/lnd_testnet.conf|
+
 # Overview #
 
 1. [Open new firewall port](#open-new-firewall-port)
