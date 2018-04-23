@@ -5,15 +5,30 @@ UNDER CONSTRUCTION
 ---
 
 # IMPORTANT ! #
-These instructions have NOT been tested in where the Raspibolt had existing Bitcoins in the mainnet wallet.
+These instructions have NOT been tested where the Raspibolt had existing Bitcoins in the mainnet wallet.
 
-Do not follow these instructions if unless your Raspibolt mainnet Bitcoin wallet and channel balances are zero - otherwise you may loose all those Bitcoins.
+Do not follow these instructions unless your Raspibolt mainnet Bitcoin wallet and channel balances are zero - otherwise you may loose all those Bitcoins.
 
 ---
 
 ![RaspiBoltDuo](images/RaspiBoltDuo.png)
 # Introduction #
-There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running in Testnet mode.
+There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running successfully and you can successfully switch between mainnet and testnet mode.
+
+## Switching between mainnet and testnet with normal RaspiBolt ##
+
+|Switch to mainnet|Switch to testnet|
+|--|--|
+|login as admin|login as admin|
+|cd /home/admin|cd /home/admin|
+|sudo systemctl stop lnd|sudo systemctl stop lnd|
+|sudo systemctl stop bitcoind|sudo systemctl stop bitcoind|
+|sudo nano ~bitcoin/.bitcoin/bitcoin.conf<br>testnet=0|sudo nano ~bitcoin/.bitcoin/bitcoin.conf<br>testnet=1|
+|sudo nano ~bitcoin/.lnd/lnd.conf<br>bitcoin.mainnet=1|sudo nano ~bitcoin/.lnd/lnd.conf<br>bitcoin.mainnet=0|
+|sudo systemctl stop bitcoind|sudo systemctl start bitcoind|
+|Wait until blockchain fully synced ...|Wait until blockchain fully synced ...|
+|sudo systemctl stop lnd|sudo systemctl start lnd|
+
 
 # A Diagram to make things clearer #
 ![Image Ports](images/RaspiBoltDuo02.png)
@@ -21,13 +36,18 @@ There is no reason that you can not run both mainnet & testnet lnd instances at 
 After completing these instructions here, the 4 instances shown will be operating on the ports shown above. 
 
 ## File Locations ##
-All locations are with respect to */home/bitcoin/*
 
-||Mainnet|Mainnet|Testnet|Testnet|
+() = default
+
+||bitcoind<br>mainnet|lnd<br>mainnet|bitcoind<br>testnet|lnd<br>testnet|
 |---|---|---|---|---|
-|instance|bitcoind|lnd|bitcoind|lnd|
-|data root|.bitcoin|.lnd/main|.bitcoin/testnet3|.lnd/data|
-|conf file|.bitcoin/bitcoin.conf|.lnd/lnd.conf|.bitcoin/testnet3/bitcoin.conf|.lnd/lnd_testnet.conf|
+|data root `[1]`|(.bitcoin)|(.lnd/data)|(.bitcoin/testnet3)|.lnd/data_testnet|
+|conf file`[1]`|(.bitcoin/bitcoin.conf)|(.lnd/lnd.conf)|.bitcoin/testnet3/bitcoin.conf|.lnd/lnd_testnet.conf|
+|service file `[2]`|bitcoind.service|lnd.service|bitcoind_testnet.service|lnd_testnet_service|
+
+`[1]` relative to */home/bitcoin/*
+
+`[2]` relative to */etc/systemd/system/*
 
 # Overview #
 
