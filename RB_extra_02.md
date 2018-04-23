@@ -37,3 +37,8 @@ while [ 0 ];do
  sleep 600
 done;
 ```
+
+---
+
+|![Busy Programmer](images/RaspiBoltBusy.jpg)|Like these Guides? [Donate](RBE_donation.md) some satoshis.|
+|--|--|
