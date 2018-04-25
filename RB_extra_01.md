@@ -174,40 +174,6 @@ admin ~  ฿  sudo cp /home/bitcoin/.lnd/tls.cert /home/admin/.lnd
 admin ~  ฿  sudo chown -R admin:admin /home/admin/.lnd
 ```
 
-## DELETE FROM HERE ##
-* Create an SSH key to use with GCP
-
-Substitute *GCP_Username* with Your GCP Username. 
-
-Use an empty passphrase when you see "Enter passphrase (empty for no passphrase):"
-
-```
-admin ~  ฿  sudo ssh-keygen -t rsa -f ~/.ssh/gcp_ssh -C GCP_Username
-admin ~  ฿  cat .ssh/gcp_ssh.pub
-ssh-rsa AAAAB3NzaC1yc2
-[....deleted...]
-47QMfLdEZQVXh2RgI+CQfWCiFrimq4h GCP_Username
-```
-* Copy the SSH key to GCP
-  * On GCP: Hamburger Menu > Compute Engine > Metadata >SSH Keys > Edit > + Add Item
-  * Paste the contents of .ssh/gcp_ssh.pub where it says *Enter entire data key*, and Click save
- 
-* Copy files from RaspiBolt to GCP
-  * Use the commands below, substituting *GCP_Username* and *GCP_External_IP*
-
-When you see "Are you sure you want to continue connecting (yes/no)?", answer *yes*
-
-```
-admin ~  ฿  sudo scp -i .ssh/gcp_ssh /home/bitcoin/.lnd/tls.cert          GCP_Username@GCP_External_IP:.lnd/
-admin ~  ฿  sudo scp -i .ssh/gcp_ssh /home/bitcoin/.lnd/readonly.macaroon GCP_Username@GCP_External_IP:.lnd/
-```
-* Delete the GCP ssh keys
-```
-admin ~  ฿  sudo rm .ssh/gcp_ssh
-admin ~  ฿  sudo rm .ssh/gcp_ssh.pub
-```
-## DELETE TO HERE ##
-
 * Copy files from Raspibolt to GCP
 
 In this section you will 'copy & paste' long text strings between login windows.
