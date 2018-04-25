@@ -17,9 +17,6 @@ This guide uses a free virtual machine on [Google Cloud Platform](https://cloud.
 # Security #
 To unlock a wallet, the password must be entered. If that password is stored on the RaspiBolt, the wallet funds are possibly vulnerable to someone with physical access to the RaspiBolt. This guide uses a remote computer to store the Password, but limits the functionality that the remote computer can perform; specifically it can not spend any wallet funds.
 
-
-
-
 |Hacker access after RaspiBolt reboot| Hacker Can ...|Hacker Can Not ...|
 |------|---|-------|
 |RaspiBolt Physical Access||Login, See Wallet Password, Open Wallet, Spend BTC |
@@ -177,6 +174,7 @@ admin ~  ฿  sudo cp /home/bitcoin/.lnd/tls.cert /home/admin/.lnd
 admin ~  ฿  sudo chown -R admin:admin /home/admin/.lnd
 ```
 
+## DELETE FROM HERE ##
 * Create an SSH key to use with GCP
 
 Substitute *GCP_Username* with Your GCP Username. 
@@ -208,6 +206,25 @@ admin ~  ฿  sudo scp -i .ssh/gcp_ssh /home/bitcoin/.lnd/readonly.macaroon GCP_
 admin ~  ฿  sudo rm .ssh/gcp_ssh
 admin ~  ฿  sudo rm .ssh/gcp_ssh.pub
 ```
+## DELETE TO HERE ##
+
+* Copy files from Raspibolt to GCP
+
+In this section you will 'copy & paste' long text strings between login windows.
+
+|On RaspiBolt|On GCP|
+|--|--|
+||`$ cd ~/.lnd`|
+|`sudo xxd -ps -u -c 1000 /home/bitcoin/.lnd/tls.cert`||
+|copy *long_text_string*||
+||`echo 'long_text_string' `&#124;` xxd -r -p - tls.cert`|
+|`sudo xxd -ps -u -c 1000 /home/bitcoin/.lnd/readonly.macaroon`||
+|copy *long_text_string*||
+||`echo 'long_text_string' `&#124;` xxd -r -p - readonly.macaroon`|
+|`sudo ls -la /home/bitcoin/.lnd/tls.cert`|`ls -la tls.cert`|
+|`sudo ls -la /home/bitcoin/.lnd/admin.macaroon`|`ls -la admin.macaroon`|
+|Check file sizes match|Check file sizes match| 
+ 
 
 ## Setup the VM ##
 * Login to your GCP VM
