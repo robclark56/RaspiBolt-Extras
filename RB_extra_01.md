@@ -174,7 +174,7 @@ admin ~  ฿  sudo cp /home/bitcoin/.lnd/tls.cert /home/admin/.lnd
 admin ~  ฿  sudo chown -R admin:admin /home/admin/.lnd
 ```
 
-* Copy files from Raspibolt to GCP
+## Copy files from RaspiBolt to GCP ##
 
 In this section you will 'copy & paste' long text strings between login windows.
 
