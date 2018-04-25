@@ -266,7 +266,7 @@ $ sudo nano .lnd/lnd_unlock.exp
 
 #!/usr/bin/expect
 #
-# File invoked by /ect/cron.hourly to unlock the lnd wallet
+# File invoked by /etc/cron.hourly to unlock the lnd wallet
 # <home_dir>/.lnd/lnd_unlock.exp
 
 #
