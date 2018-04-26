@@ -108,20 +108,18 @@ Review the [Raspberry Pi](https://github.com/Stadicus/guides/blob/master/raspibo
 ```
 admin ~  ฿  sudo systemctl stop lnd
 admin ~  ฿  sudo systemctl stop bitcoind
-admin ~  ฿  sudo systemctl disable lnd
-admin ~  ฿  sudo systemctl disable bitcoind
 ```
 
-NO!!!!!
-##Make testnet3 Directory for lnd ##
+NO!!!!! YES???
+##Make data_testnet Directory for lnd ##
 ```bash
 admin /home/bitcoin/.lnd  ฿  cd /home/bitcoin/.lnd
-admin /home/bitcoin/.lnd  ฿  sudo mkdir testnet3
-admin /home/bitcoin/.lnd  ฿  sudo chown bitcoin:bitcoin testnet3
-admin /home/bitcoin/.lnd  ฿  sudo cp -p *.macaroon testnet3
-admin /home/bitcoin/.lnd  ฿  sudo cp -p tls.* testnet3
-admin /home/bitcoin/.lnd  ฿  sudo cp -pr data testnet3
-admin /home/bitcoin/.lnd  ฿  ls testnet3
+admin /home/bitcoin/.lnd  ฿  sudo mkdir testnet
+admin /home/bitcoin/.lnd  ฿  sudo chown bitcoin:bitcoin testnet
+admin /home/bitcoin/.lnd  ฿  sudo cp -p *.macaroon testnet
+admin /home/bitcoin/.lnd  ฿  sudo cp -p tls.* testnet
+admin /home/bitcoin/.lnd  ฿  sudo cp -pr data testnet
+admin /home/bitcoin/.lnd  ฿  ls testnet
 total 36
 drwxr-xr-x 4 bitcoin bitcoin 4096 Apr 16 17:25 .
 drwxr-xr-x 5 bitcoin bitcoin 4096 Apr 16 16:58 ..
@@ -226,8 +224,8 @@ bitcoin.mainnet=1
 
 bitcoin.node=bitcoind
 
-[Bitcoind]
-bitcoind.zmqpath=tcp://127.0.0.1:29000
+#[Bitcoind]
+#bitcoind.zmqpath=tcp://127.0.0.1:29000
 
 [autopilot]
 autopilot.active=1
@@ -261,8 +259,8 @@ bitcoin.testnet=1
 
 bitcoin.node=bitcoind
 
-[Bitcoind]
-bitcoind.zmqpath=tcp://127.0.0.1:28332
+#[Bitcoind]
+#bitcoind.zmqpath=tcp://127.0.0.1:28332
 
 [autopilot]
 autopilot.active=1
@@ -389,7 +387,7 @@ After=bitcoind.service
 # get var PUBIP from file
 EnvironmentFile=/run/publicip
 
-ExecStart=/usr/local/bin/lnd   --configfile=/home/bitcoin/.lnd/lnd_testnet.conf --externalip=${PUBLICIP}:19735
+ExecStart=/usr/local/bin/lnd   --lnddir=/home/bitcoin/.lnd/lnd_testnet.conf --externalip=${PUBLICIP}:19735
 User=bitcoin
 Group=bitcoin
 LimitNOFILE=128000
