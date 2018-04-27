@@ -3,7 +3,7 @@ If you found any of these RaspiBolt extras valuable, feel free to donate via Lig
 
 |Testnet|Mainnet|
 |:---:|:---:|
-|<a href="http://raspibolt.epizy.com/lnd.php?memo=Thanks%20for%20the%20Donation&image_only=1" target="_blank">![Demo QR](images/RBE-QR_demo.png)<br>Click here</a><br>QR code will be valid for 1 hour|Under Construction|
+|<a href="http://raspibolt.epizy.com/lnd.php?memo=Thanks%20for%20the%20Donation&image_only=1&testnet=1" target="_blank">![Demo QR](images/RBE-QR_demo.png)<br>Click here</a><br>QR code will be valid for 1 hour|Under Construction|
 
 
 
