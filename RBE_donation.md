@@ -8,7 +8,7 @@ If you found any of these RaspiBolt extras valuable, feel free to donate via Lig
 
 
 1. These QR codes were built using [these instructions](RBE_REST_WAN.md).
-2. If you don't see QR codes, it is because 
+2. If you don't receive QR codes, it is because 
    1. my RaspiBolt is turned off, or 
    1. my lnd (mainnet) is not running, or
    1. my lnd (testnet) is not running.
