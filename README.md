@@ -8,7 +8,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 # The 'Lights Out' RaspiBolt
 
-|<img src="images/lightsoff.gif" alt="Lights Off" height="100">|The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change in public IP.|
+|<img src="images/lightsoff.gif" alt="Lights Off" height="100" width="200">|The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change in public IP.|
 |---|:--|
 
 1. [Auto Lightning Wallet Unlock](RB_extra_01.md)
@@ -37,7 +37,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 # Receive LN Payments
 ## Donations (sender decides) & Fixed Amounts (you decide)
-|<img src="images/RBE-04-LN-QR_fixed.png" alt="QR" width="100" height="100">|The objective of this Extra is to demonstrate generating Payment Requests including QR codes.|
+|![QR Demo](images/RBE-QR_demo.png)|The objective of this Extra is to demonstrate generating Payment Requests including QR codes.|
 |---|:--|
 6. [One-Time Payment Requests (a.k.a Invoices)](RB_extra_04.md)
 7. [Live Payment Requests (a.k.a Invoices)](RB_extra_05.md): (Requires web server).
