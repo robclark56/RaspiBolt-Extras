@@ -8,7 +8,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 # The 'Lights Out' RaspiBolt
 
-|<img src="images/lightsoff.gif" alt="Lights Off" height="100" width="200">|The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change in public IP.|
+|<img src="images/lightsoff.gif" alt="Lights Off" height="120" width="240">|The objective of this pair of Extras is to allow a RaspiBolt to recover *without human intervention* from a power failure and/or a change in public IP.|
 |---|:--|
 
 1. [Auto Lightning Wallet Unlock](RB_extra_01.md)
@@ -19,7 +19,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 # RaspiBoltDuo
 ## Running LND mainnet & testnet Simultaneously on one RaspiBolt
 
-|<img src="images/RaspiBoltDuo.png" alt="Simultaneous mainnet & testnet" height="100" width="135">|The objective of this Extra is to have two instances of bitcoind and two of lnd running on the same RaspiBolt.|
+|<img src="images/RaspiBoltDuo.png" alt="Simultaneous mainnet & testnet" height="120" width="150">|The objective of this Extra is to have two instances of bitcoind and two of lnd running on the same RaspiBolt.|
 |---|:--|
 
 3. [Simultaneous mainnet & testnet](RB_extra_03.md)
@@ -27,7 +27,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 ---
 
 # Enabling REST Access #
-|<img src="images/RBE_REST.jpg" alt="REST">|The objective of this Extra is to enable and demonstrate using the REST interface instead of rpc/lncli.|
+|<img src="images/RBE_REST.jpg" alt="REST" width="120" height="120">|The objective of this Extra is to enable and demonstrate using the REST interface instead of rpc/lncli.|
 |---|:--|
 
 4. [Enable and Use REST with lnd - LAN](RBE_REST.md)
