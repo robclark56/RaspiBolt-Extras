@@ -7,8 +7,9 @@ If you found any of these RaspiBolt extras valuable, feel free to donate via Lig
 
 
 
-1. The Payment Requests and QR codes were built using [these instructions](RBE_REST_WAN.md).
-2. If you don't receive QR codes, it is because 
+1. The Payment Requests are built using [these instructions](RBE_REST_WAN.md).
+1. The QR Codes are built using http://qrickit.com/qrickit_apps/qrickit_api.php
+1. If you don't receive QR codes, it is because 
    1. my RaspiBolt is turned off, or 
    1. my lnd (mainnet) is not running, or
    1. my lnd (testnet) is not running.
