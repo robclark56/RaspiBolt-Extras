@@ -115,9 +115,13 @@ MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_ma
 ```
 
 # Test - using PHP on WAN Host #
+![lnd_php](images/lnd_php_small.png)
+
+This section will use PHP on a web server to generate live Payment Requests and display them via a simple URL.
+
 Create [lnd.php](resources/lnd.php) on your WAN Host. Change the two CHANGE_ME values near the top of the file.
 
-To see this in action, open `http://your.web.server/lnd.php`
+To see this in action, open `http://your.web.server/lnd.php` or [My lnd.php](http://raspibolt.epizy.com/lnd.php)
 
 ---
 
