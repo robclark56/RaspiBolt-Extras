@@ -26,12 +26,13 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 ---
 
-# Enabling REST Access #
+# Using REST Access #
+## Including generating and displaying Payment Request QR Codes ##
 |<img src="images/RBE_REST.jpg" alt="REST" width="120" height="120">|The objective of this Extra is to enable and demonstrate using the REST interface instead of rpc/lncli.|
 |---|:--|
 
 4. [Enable and Use REST with lnd - LAN](RBE_REST.md)
-5. [Enable and Use REST with lnd - WAN](RBE_REST_WAN.md)
+5. [Enable and Use REST with lnd - WAN](RBE_REST_WAN.md). Using lncli, or REST & PHP (Requires web server).
 
 ---
 
@@ -40,7 +41,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 |![QR Demo](images/RBE-QR_demo.png)|The objective of this Extra is to demonstrate generating Payment Requests including QR codes.|
 |---|:--|
 6. [One-Time Payment Requests (a.k.a Invoices)](RB_extra_04.md) using lncli
-7. [Live Payment Requests (a.k.a Invoices)](RB_extra_05.md) using PHP (Requires web server).
+7. [Live Payment Requests (a.k.a Invoices)](RB_extra_05.md) using lncli, or REST & PHP (Requires web server).
 
 ---
 
