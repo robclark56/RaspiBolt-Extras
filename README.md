@@ -39,8 +39,8 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 ## Donations (sender decides) & Fixed Amounts (you decide)
 |![QR Demo](images/RBE-QR_demo.png)|The objective of this Extra is to demonstrate generating Payment Requests including QR codes.|
 |---|:--|
-6. [One-Time Payment Requests (a.k.a Invoices)](RB_extra_04.md)
-7. [Live Payment Requests (a.k.a Invoices)](RB_extra_05.md): (Requires web server).
+6. [One-Time Payment Requests (a.k.a Invoices)](RB_extra_04.md) using lncli
+7. [Live Payment Requests (a.k.a Invoices)](RB_extra_05.md) using PHP (Requires web server).
 
 ---
 
