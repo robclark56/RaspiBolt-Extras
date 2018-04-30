@@ -14,6 +14,9 @@
     - amt=Sataoshi (eg: amt=100000)
     - image_only   (eg: image_only=1). memo and/or amt must also be set.
 
+Create $macaroon_hex using this command: 
+   $  xxd -ps -u -c 1000  /home/bitcoin/.lnd/invoice.macaroon
+
 */
 
 function getPaymentRequest($memo='',$satoshi=0){
