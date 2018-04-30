@@ -8,6 +8,7 @@ If you found any of these RaspiBolt extras valuable, feel free to donate via Lig
 
 
 1. The Payment Requests are built using [these instructions](RBE_REST_WAN.md).
+1. The PHP code is running on a free webserver hosted at [https://app.infinityfree.net](https://app.infinityfree.net)
 1. The QR Codes are built using http://qrickit.com/qrickit_apps/qrickit_api.php
 1. If you don't receive QR codes, it is because 
    1. my RaspiBolt is turned off, or 
