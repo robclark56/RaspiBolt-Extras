@@ -118,8 +118,10 @@ MyWanHost $: curl --insecure  --header "Grpc-Metadata-macaroon: $(cat invoice_ma
 ![lnd_php](images/lnd_php_small.png)
 
 This section will use PHP on a web server to generate live Payment Requests and display them via a simple URL.
+## Free Web Server ##
+If you do not have ready access to a web server, you can get a free Web server account at [https://app.infinityfree.net](https://app.infinityfree.net).
 
-Create [lnd.php](resources/lnd.php) on your WAN Host. Change the two CHANGE_ME values near the top of the file.
+Create [lnd.php](resources/lnd.php) on your Web server. Change the two CHANGE_ME values near the top of the file.
 
 To see this in action, open `http://your.web.server/lnd.php` or [My lnd.php](http://raspibolt.epizy.com/lnd.php)
 
