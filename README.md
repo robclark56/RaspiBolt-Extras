@@ -31,7 +31,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 |<img src="images/RBE_REST.jpg" alt="REST" width="120" height="120">|The objective of this Extra is to enable and demonstrate using the REST interface instead of rpc/lncli.|
 |---|:--|
 
-4. [Enable and Use REST with lnd - LAN](RBE_REST.md). Uising lncli.
+4. [Enable and Use REST with lnd - LAN](RBE_REST.md). Using lncli.
 5. [Enable and Use REST with lnd - WAN](RBE_REST_WAN.md). 
    * Using lncli, or 
    * Using REST & PHP. Includes generating QR codes. Requires web server.
