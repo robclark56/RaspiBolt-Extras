@@ -188,7 +188,7 @@ In this section you will 'copy & paste' long text strings between login windows.
 |copy *long_text_string*||
 ||`echo 'long_text_string' `&#124;` xxd -r -p - readonly.macaroon`|
 |`sudo ls -la /home/bitcoin/.lnd/tls.cert`|`ls -la tls.cert`|
-|`sudo ls -la /home/bitcoin/.lnd/admin.macaroon`|`ls -la admin.macaroon`|
+|`sudo ls -la /home/bitcoin/.lnd/readonly.macaroon`|`ls -la readonly.macaroon`|
 |Check file sizes match|Check file sizes match| 
  
 
