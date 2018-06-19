@@ -50,7 +50,7 @@ This does open a new attack vector so adds risk. But to spend your coins, a hack
 # INSTRUCTIONS #
 
 ## Prepare your Webserver ## 
-Login to your webserver and add this PHP file so it can be accessed via a URL like: `https://my.domian.com/raspibolt/utilities.php`
+Login to your webserver and add this PHP file so it can be accessed via a URL like: `https://my.domain.com/raspibolt/utilities.php`
 
 ```php
 <?php
@@ -66,7 +66,15 @@ Login to your webserver and add this PHP file so it can be accessed via a URL li
 //     'IP'  : Set 'yyy' to the public static IP address of your RaspiBolt (eg. '100.20.30.40')
 //     'FQDN': Set 'yyy' to the public FQDN of your RaspiBolt (eg. 'raspibolt.my.domain.com')
 $source = array('xx'=>'yyy');
+define('ESTORE_PUB_KEY',
+'-----BEGIN PUBLIC KEY-----
+xxxxxxx
+-----END PUBLIC KEY-----'
+);
 /////////// END CHANGE ME /////////////
+
+// DIAGNOSTICS: Uncomment next line for diagnotics only
+// echo 'Remote Address='.$_SERVER['REMOTE_ADDR'].' ';
 
 // Only allow if source is the RaspiBolt site
 if(isset($source['IP'])){
@@ -78,12 +86,6 @@ if(isset($source['IP'])){
     exit;
 }
 
-define('ESTORE_PUB_KEY',
-'-----BEGIN PUBLIC KEY-----
-xxxxxxx
------END PUBLIC KEY-----'
-);
-
 switch($_POST['action']){
     case 'getPubKey':
         echo ESTORE_PUB_KEY;
@@ -91,15 +93,45 @@ switch($_POST['action']){
 }
 ?>
 ```
+
 ## Create a Temporary Directory and a Private/Public Key Pair ##
 Login as admin to your RaspiBolt and execute these commands
-```
+```bash
 admin ~  ฿  mkdir temp_unlock
 admin ~  ฿  cd temp_unlock
-admin ~/temp_unlock  ฿ xxxxxx
-
+admin ~/temp_unlock  ฿  openssl genrsa -out private.pem 2048
+admin ~/temp_unlock  ฿  openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+admin ~/temp_unlock  ฿  ls -la
+total 16
+drwxr-xr-x  2 admin admin 4096 Jun 19 14:33 .
+drwxr-xr-x 11 admin admin 4096 Jun 19 14:29 ..
+-rw-------  1 admin admin 1679 Jun 19 14:32 private.pem
+-rw-r--r--  1 admin admin  451 Jun 19 14:33 public.pem
+admin ~/temp_unlock  ฿  cat public.pem
+-----BEGIN PUBLIC KEY-----
+[... lines deleted ...]
+-----END PUBLIC KEY-----
 ```
-## Add Public Key to Webserver, and test Security ##
+## Add Public Key to Webserver ##
+On your webserver, edit the __CHANGE ME__ section in the PHP file to:
+
+* include either the IP ADDRESS or FQDN of your RaspiBolt.
+* enter the PUBLIC KEY from the step above
+
+## Test the PHP file ##
+From the admin login on the RaspiBolt, exeute this command (CHANGE_ME should be the FQDN of your webserver. e.g. raspibolt.my.domain.com)
+
+```bash
+admin ~  ฿  curl --data "action=getPubKey" https://CHANGE_ME/raspibolt/utilities.php
+
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ThxCLeqlaznLkHCA2Ih
+[... lines deleted ...]
+cQIDAQAB
+-----END PUBLIC KEY-----ad
+```
+
+If you do not see your Public Key, try commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
 
 ## Encrypt your Wallet Password ##
 
