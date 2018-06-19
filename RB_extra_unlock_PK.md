@@ -134,15 +134,17 @@ cQIDAQAB
 If you do not see your Public Key, try commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
 
 ## Encrypt your Wallet Password ##
+In the steps below, you will encrypt your password, and then check you can correctly decode it.
 
-echo -n 'abcd' | openssl rsautl -encrypt -inkey public.pem -pubin | base64
+Change `MyUnlockWalletPassword` to the password you enter with the `lncli unlock` command.
 
-base64 -d | openssl rsautl -decrypt -inkey private.pem
+```bash
+admin ~/temp_unlock  ฿ echo -n 'MyUnlockWalletPassword' | openssl rsautl -encrypt -inkey public.pem -pubin | base64 > wallet_password.enc
+admin ~/temp_unlock  ฿ cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey private.pem
+MyUnlockWalletPassword
+```
 
 ## Create a Cron Job ##
-
-
-
 * Create and save hourly cron job.  
 
 Note: The cron job will run approximately every 60 mins, but not usually at 'the top of the hour'.
@@ -155,7 +157,7 @@ $ sudo nano /etc/cron.hourly/lnd_unlock
 Change *GCP_Username*
 ```
 #!/bin/bash
-# RaspiBolt LND: Script to unlock wallet
+# RaspiBol t LND: Script to unlock wallet
 # /etc/cron.hourly/lnd_unlock
 
 #
