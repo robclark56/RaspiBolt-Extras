@@ -66,10 +66,8 @@ Login to your webserver and add this PHP file so it can be accessed via a URL li
 //     'IP'  : Set 'yyy' to the public static IP address of your RaspiBolt (eg. '100.20.30.40')
 //     'FQDN': Set 'yyy' to the public FQDN of your RaspiBolt (eg. 'raspibolt.my.domain.com')
 $source = array('xx'=>'yyy');
-define('ESTORE_PUB_KEY',
-'-----BEGIN PUBLIC KEY-----
-xxxxxxx
------END PUBLIC KEY-----'
+define('ENCRYPTED_PASSWORD',
+'xxxxxxx'
 );
 /////////// END CHANGE ME /////////////
 
@@ -87,8 +85,8 @@ if(isset($source['IP'])){
 }
 
 switch($_POST['action']){
-    case 'getPubKey':
-        echo ESTORE_PUB_KEY;
+    case 'getEncryptedPassword':
+        echo ENCRYPTED_PASSWORD;
         exit;
 }
 ?>
@@ -112,37 +110,41 @@ admin ~/temp_unlock  ฿  cat public.pem
 [... lines deleted ...]
 -----END PUBLIC KEY-----
 ```
-## Add Public Key to Webserver ##
-On your webserver, edit the __CHANGE ME__ section in the PHP file to:
-
-* include either the IP ADDRESS or FQDN of your RaspiBolt.
-* enter the PUBLIC KEY from the step above
-
-## Test the PHP file ##
-From the admin login on the RaspiBolt, exeute this command (CHANGE_ME should be the FQDN of your webserver. e.g. raspibolt.my.domain.com)
-
-```bash
-admin ~  ฿  curl --data "action=getPubKey" https://CHANGE_ME/raspibolt/utilities.php
-
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ThxCLeqlaznLkHCA2Ih
-[... lines deleted ...]
-cQIDAQAB
------END PUBLIC KEY-----ad
-```
-
-If you do not see your Public Key, try commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
-
 ## Encrypt your Wallet Password ##
 In the steps below, you will encrypt your password, and then check you can correctly decode it.
 
 Change `MyUnlockWalletPassword` to the password you enter with the `lncli unlock` command.
 
 ```bash
-admin ~/temp_unlock  ฿ echo -n 'MyUnlockWalletPassword' | openssl rsautl -encrypt -inkey public.pem -pubin | base64 > wallet_password.enc
-admin ~/temp_unlock  ฿ cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey private.pem
+admin ~/temp_unlock  ฿ echo -n 'MyUnlockWalletPassword' | openssl rsautl -encrypt -inkey encrypt.pem -pubin |base64 > wallet_password.enc
+
+admin ~/temp_unlock  ฿ cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey decrypt.pem 
 MyUnlockWalletPassword
+
+admin ~/temp_unlock  ฿ cat wallet_password.enc
+xxxxxxxxxxxxx
+xxxxxxxxxxxxxx
+xxxxxxxxxxxx
+
 ```
+## Copy Encrypted Wallet Password to Webserver ##
+On your webserver, edit the __CHANGE ME__ section in the PHP file to:
+
+* include either the IP ADDRESS or FQDN of your RaspiBolt.
+* enter the output of `cat wallet_password.enc`, as the ENCRYPTED_PASSWORD
+
+## Test the PHP file ##
+From the admin login on the RaspiBolt, exeute this command (CHANGE_ME should be the FQDN of your webserver. e.g. raspibolt.my.domain.com)
+
+```bash
+admin ~  ฿  curl --data "action=getEncryptedPassword" https://CHANGE_ME/raspibolt/utilities.php
+
+xxxxxxxxxx
+```
+
+If you do not see your Encrypted Password, try commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
+
+
 
 ## Create a Cron Job ##
 * Create and save hourly cron job.  
