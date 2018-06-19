@@ -26,9 +26,9 @@ If the wallet remains unlocked, the lnd server is effectively offline and can no
   
 # SECURITY #
 In these instructions, 
- * your wallet password will not be stored anywhere in plain text; it is stored encrypted on the webserver.
- * the decryption key is stored on the RaspiBolt
- * the admin.macaroon is not used; meaning a hacker can not spend your funds.
+ * Your wallet password will not be stored anywhere in plain text; it is stored encrypted (using a Private Key) on the RaspiBolt.
+ * The Public Key (decryption key) is stored on the webserver.
+ * Your wallet password is never transmitted over the Internet; either in Plain Text or Encrypted.
  
 |Hacker access after RaspiBolt reboot| Hacker Can ...|Hacker Can Not ...|
 |------|---|-------|
@@ -36,15 +36,16 @@ In these instructions,
 |Remote webserver Login|Open Wallet|See Wallet Password, Spend BTC, Login to OS|
 
 This does open a new attack vector so adds risk. But to spend your coins, a hacker would still need
-* access to your RaspiBolt, 
-* the admin login certificate, and 
+* LAN access to your RaspiBolt, 
+* the admin SSH certificate, and 
 * to have not moved the RaspiBolt to a different network.
 
 # DESIGN #
 * A cron job runs hourly on the RaspiBolt.
-* If it finds the wallet is locked ...
-  * The RaspiBolt sends an https POST request to your webserver, with the public key necessary to decrypt the wallet password
-  * The webserver issues the REST `unlockwallet` command back to the RaspiBolt, with the decrypted wallet password. 
+* If it finds the wallet is locked, the RaspiBolt ...
+  * retrieves the Public Key from the webserver
+  * decrypts the wallet password using the Public Key
+  * unlocks the wallet with the wallet password
   
 # PREPARATION #
 
