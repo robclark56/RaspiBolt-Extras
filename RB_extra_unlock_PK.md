@@ -135,6 +135,10 @@ If you do not see your Public Key, try commenting out the line below `// DIAGNOS
 
 ## Encrypt your Wallet Password ##
 
+echo -n 'abcd' | openssl rsautl -encrypt -inkey public.pem -pubin | base64
+
+base64 -d | openssl rsautl -decrypt -inkey private.pem
+
 ## Create a Cron Job ##
 
 
