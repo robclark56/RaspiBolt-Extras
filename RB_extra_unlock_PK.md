@@ -51,6 +51,10 @@ This does open a new attack vector so adds risk. But to spend your coins, a hack
   
 # INSTRUCTIONS #
 
+## Install _Bonus guide: System overview_ ##
+If not already done, follow [these instructions](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_61_system-overview.md)
+
+![OvervewImage](https://github.com/Stadicus/guides/raw/master/raspibolt/images/60_status_overview.png)
 ## Prepare your lnd ##
 * Edit your lnd.conf to enable the REST interface. 
 
@@ -135,7 +139,6 @@ Enter Password:MyUnlockWalletPassword
 admin ~/temp_unlock  ฿  cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey private.pem;echo
 MyUnlockWalletPassword
 
-
 admin ~/temp_unlock  ฿ cat wallet_password.enc
 ERn6gAhdCOW9Zc6Y7v/ZvbxVKcorVcoF3OWt+QSuUdVhwLecrDGDk5Z2W8BtYDafXDo4lTujKKCB
 [...lines deleted...]
@@ -152,12 +155,26 @@ On your webserver, edit the __CHANGE ME__ section in the PHP file to:
 From the admin login on the RaspiBolt, exeute this command (CHANGE_ME should be the FQDN of your webserver. e.g. raspibolt.my.domain.com)
 
 ```bash
-admin ~  ฿  curl --data "action=getEncryptedPassword" https://CHANGE_ME/raspibolt/utilities.php
-
-xxxxxxxxxx
+admin ~/temp_unlock  ฿  curl --data "action=getEncryptedPassword" https://CHANGE_ME/raspibolt/utilities.php
+ERn6gAhdCOW9Zc6Y7v/ZvbxVKcorVcoF3OWt+QSuUdVhwLecrDGDk5Z2W8BtYDafXDo4lTujKKCB
+[...lines deleted...]
+wjNRhxvTnLiGp4xs+F5ocjuQdfO7bbIrmWZ9jw=
 ```
 
-If you do not see your Encrypted Password, try commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
+If you do not see your Encrypted Password, try temporarily commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
+
+## Move the Private Key to the .lnd directory ##
+Also remove write permission.
+```
+admin ~/temp_unlock  ฿  sudo mv private.pem /home/bitcoin/.lnd/
+admin ~/temp_unlock  ฿  sudo chmod 0400 /home/bitcoin/.lnd/private.pem
+```
+
+## Delete the temp_unlock Directory ##
+```
+admin ~/temp_unlock  ฿  cd ..
+admin ~  ฿  rm -r temp_unlock
+```
 
 ## Create a Cron Job ##
 * Create and save hourly cron job.  
@@ -165,64 +182,46 @@ If you do not see your Encrypted Password, try commenting out the line below `//
 Note: The cron job will run approximately every 60 mins, but not usually at 'the top of the hour'.
 
 ```
-$ sudo touch /etc/cron.hourly/lnd_unlock
-$ sudo chmod +x /etc/cron.hourly/lnd_unlock
-$ sudo nano /etc/cron.hourly/lnd_unlock
+admin ~  ฿  sudo touch /etc/cron.hourly/lnd_unlock
+admin ~  ฿  sudo chmod +x /etc/cron.hourly/lnd_unlock
+admin ~  ฿  sudo nano /etc/cron.hourly/lnd_unlock
 ```
-Change *GCP_Username*
+Change the CHANGE_ME section
 ```
 #!/bin/bash
-# RaspiBol t LND: Script to unlock wallet
-# /etc/cron.hourly/lnd_unlock
-
-#
-# Change next 1 line
-#
-home_dir="/home/GCP_Username"
-
-################################
-lncli="$home_dir/run_lncli"
-$lncli getinfo  2>&1 | grep "identity_pubkey" >/dev/null
-wallet_unlocked=$?
-if [ "$wallet_unlocked" -eq 1 ] ; then
- echo "Wallet Locked"
- /usr/bin/expect $home_dir/.lnd/lnd_unlock.exp  2>&1 > /dev/null
-else
- echo "Wallet UnLocked"
+###### CHANGE_ME ############
+url='my.domain.com/raspibolt/utilities.php'
+###### END CHANGE_ME ########
+restlisten=8080
+locked=$(/usr/local/bin/raspibolt 2> /dev/null | grep 'Wallet Locked' > /dev/null;echo $?)
+if [ "$locked" == "1" ]; then
+ exit;
 fi
+
+response=$(curl -s --data "action=getEncryptedPassword" https://${url})
+pw=$(echo  $response| sed 's/ /\n/g' | base64 -d | openssl rsautl -decrypt -inkey /home/bitcoin/.lnd/private.pem)
+curl --insecure \
+     --header "Content-Type: application/json" \
+     --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"  \
+     --data "{\"wallet_password\":\"$(echo -n ${pw}|base64)\"}"   \
+     https://localhost:${restlisten}/v1/unlockwallet
+
 ```
 
 # Test #
-On GCP:
+In this section you will lock lnd wallet, and the unlock it with the cron file.
+
+Note: It is not clear why but lnd responds with `{"error":"context canceled","code":1}` when the wallet is successfully unlocked.
 
 ```
-$ ./run_lncli getinfo
-[lncli] Wallet is encrypted. Please unlock using 'lncli unlock', or set password using 'lncli create' if this is the first time starting lnd.
+admin ~  ฿  sudo systemctl restart lnd
+admin ~  ฿  raspibolt
+.....  Wallet Locked  ....
+admin ~  ฿  /etc/cron.hourly/lnd_unlock
+{"error":"context canceled","code":1}
+admin ~  ฿  sleep 30;raspibolt
 ```
-If you see the above, it confirms the communication from your GCP instance to your RaspiBolt is working.
-
-Repeat the above command every 10 mins or so for at max. 1 hour, until you see something like:
-```
-$ ./run_lncli getinfo
-{
-    "identity_pubkey": "xxxxx",
-    "alias": "xxxxx",
-    "num_pending_channels": 0,
-    "num_active_channels": 1,
-    "num_peers": 2,
-    "block_height": 1291957,
-    "block_hash": "00000000000000ca546331fbe0d83df81b8f4bf2b24f081cce359920faaa8dc1",
-    "synced_to_chain": true,
-    "testnet": true,
-    "chains": [
-        "bitcoin"
-    ],
-    "uris": [
-        "xxx@x.x.x.x:9735"
-    ],
-    "best_header_timestamp": "1523192388"
-}
-```
+If you do not see _Wallet Locked_: Congratulations - everything is working fine!
 
 ---
 
