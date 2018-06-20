@@ -24,6 +24,8 @@ This guide explains how to automatically unlock the [RaspiBolt](https://github.c
   * A static public [Fully Qualified Domain Name=FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name). This can be provided using a [Dynamic DNS Service](https://en.wikipedia.org/wiki/Dynamic_DNS).
   
 # SECURITY #
+As the RaspiBolt is probably more secure than your webserver, all password encryption and decryption is done on the RaspiBolt.
+
 In these instructions, 
  * Your wallet password is not be stored anywhere in plain text; it is stored encrypted (using a Private Key) on the webserver.
  * The Public Key (decryption key) is stored on the webserver.
@@ -122,15 +124,17 @@ drwxr-xr-x 11 admin admin 4096 Jun 19 14:29 ..
 -rw-r--r--  1 admin admin  451 Jun 19 14:33 public.pem
 ```
 ## Encrypt your Wallet Password ##
-In the steps below, you will encrypt your password, and then check you can correctly decode it.
+In the steps below, you will encrypt your password, and then check you can correctly decode it. This is done in such a way that your wallet password is not saved in the terminal history file.
 
 Change `MyUnlockWalletPassword` to the password you enter with the `lncli unlock` command.
 
 ```bash
-admin ~/temp_unlock  ฿ echo -n 'MyUnlockWalletPassword' | openssl rsautl -encrypt -inkey public.pem -pubin |base64 > wallet_password.enc
+admin ~/temp_unlock  ฿  echo -n Enter Password:;read -s password; echo -n $password | openssl rsautl -encrypt -inkey public.pem -pubin |base64 > wallet_password.enc;echo
+Enter Password:MyUnlockWalletPassword
 
-admin ~/temp_unlock  ฿ cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey private.pem 
+admin ~/temp_unlock  ฿  cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey private.pem;echo
 MyUnlockWalletPassword
+
 
 admin ~/temp_unlock  ฿ cat wallet_password.enc
 ERn6gAhdCOW9Zc6Y7v/ZvbxVKcorVcoF3OWt+QSuUdVhwLecrDGDk5Z2W8BtYDafXDo4lTujKKCB
