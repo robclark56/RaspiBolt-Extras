@@ -10,23 +10,22 @@ If you store your Wallet Password anywhere you risk loosing 100% of your wallet 
 
 Difficulty: Medium
 
-This guide explains how to automatically unlock the [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) Lighting (lnd) wallet using a computer at a different location. The objective is to have a 'Lights Off' RaspiBolt that recovers automatically all the way to an unlocked wallet in the event that it has rebooted and is unattended - e.g. a power failure.
+If your lnd wallet is unlocked, the lnd server is effectively offline and can not participate in the Lightning Network.
 
-If the wallet remains unlocked, the lnd server is effectively offline and can not participate in the Lightning Network.
+This guide explains how to automatically unlock the [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) Lighting (lnd) wallet using a computer at a different location. The objective is to have a 'Lights Off' RaspiBolt that recovers automatically all the way to an unlocked wallet in the event that it has rebooted and is unattended - e.g. a power failure.
 
 # REQUIREMENTS #
 * Your RaspiBolt
 * A webserver at a different location that you control, with
   * [PHP](https://en.wikipedia.org/wiki/PHP)
   * [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Note: The webserver does NOT need a valid SSL certificate.
-  * ???? static IP????
 * Your RaspiBolt must be behind a firewall with either:
   * A static public IP, or
   * A static public [Fully Qualified Domain Name=FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name). This can be provided using a [Dynamic DNS Service](https://en.wikipedia.org/wiki/Dynamic_DNS).
   
 # SECURITY #
 In these instructions, 
- * Your wallet password is not be stored anywhere in plain text; it is stored encrypted (using a Private Key) on the RaspiBolt.
+ * Your wallet password is not be stored anywhere in plain text; it is stored encrypted (using a Private Key) on the webserver.
  * The Public Key (decryption key) is stored on the webserver.
  * Your wallet password is never transmitted over the Internet; either in Plain Text or Encrypted.
  
@@ -46,9 +45,23 @@ This does open a new attack vector so adds risk. But to spend your coins, a hack
   * retrieves the Public Key from the webserver
   * decrypts the wallet password using the Public Key
   * unlocks the wallet with the wallet password
+* The webserver only responds to requests from the IP address (or FQDN) you nominate.
   
 # INSTRUCTIONS #
 
+## Prepare your lnd ##
+* Edit your lnd.conf to enable the REST interface. 
+
+`admin ~  ฿ nano /home/bitcoin/.lnd/lnd.conf`
+
+```
+[Application Options]
+restlisten=localhost:8080
+```
+* Restart your lnd server
+```bash
+admin ~  ฿  sudo systemctl restart lnd
+```
 ## Prepare your Webserver ## 
 Login to your webserver and add this PHP file so it can be accessed via a URL like: `https://my.domain.com/raspibolt/utilities.php`
 
@@ -105,10 +118,6 @@ drwxr-xr-x  2 admin admin 4096 Jun 19 14:33 .
 drwxr-xr-x 11 admin admin 4096 Jun 19 14:29 ..
 -rw-------  1 admin admin 1679 Jun 19 14:32 private.pem
 -rw-r--r--  1 admin admin  451 Jun 19 14:33 public.pem
-admin ~/temp_unlock  ฿  cat public.pem
------BEGIN PUBLIC KEY-----
-[... lines deleted ...]
------END PUBLIC KEY-----
 ```
 ## Encrypt your Wallet Password ##
 In the steps below, you will encrypt your password, and then check you can correctly decode it.
@@ -116,15 +125,15 @@ In the steps below, you will encrypt your password, and then check you can corre
 Change `MyUnlockWalletPassword` to the password you enter with the `lncli unlock` command.
 
 ```bash
-admin ~/temp_unlock  ฿ echo -n 'MyUnlockWalletPassword' | openssl rsautl -encrypt -inkey encrypt.pem -pubin |base64 > wallet_password.enc
+admin ~/temp_unlock  ฿ echo -n 'MyUnlockWalletPassword' | openssl rsautl -encrypt -inkey public.pem -pubin |base64 > wallet_password.enc
 
-admin ~/temp_unlock  ฿ cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey decrypt.pem 
+admin ~/temp_unlock  ฿ cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey private.pem 
 MyUnlockWalletPassword
 
 admin ~/temp_unlock  ฿ cat wallet_password.enc
-xxxxxxxxxxxxx
-xxxxxxxxxxxxxx
-xxxxxxxxxxxx
+ERn6gAhdCOW9Zc6Y7v/ZvbxVKcorVcoF3OWt+QSuUdVhwLecrDGDk5Z2W8BtYDafXDo4lTujKKCB
+[...lines deleted...]
+wjNRhxvTnLiGp4xs+F5ocjuQdfO7bbIrmWZ9jw==
 
 ```
 ## Copy Encrypted Wallet Password to Webserver ##
@@ -143,8 +152,6 @@ xxxxxxxxxx
 ```
 
 If you do not see your Encrypted Password, try commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
-
-
 
 ## Create a Cron Job ##
 * Create and save hourly cron job.  
