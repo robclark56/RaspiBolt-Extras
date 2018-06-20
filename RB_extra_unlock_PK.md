@@ -67,10 +67,13 @@ Login to your webserver and add this PHP file so it can be accessed via a URL li
 
 ```php
 <?php
-/* raspibolt/utilities.php
+/*
+  raspibolt/utilities.php
   
   An offsite web server to support a RaspiBolt (https://github.com/Stadicus/guides/blob/master/raspibolt/README.md)
-  Specifically: xxxxxxxxxxxxxxx
+  
+  Specifically: https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_unlock_PK.md
+
 */
 
 /////////// CHANGE ME /////////////////
@@ -79,13 +82,12 @@ Login to your webserver and add this PHP file so it can be accessed via a URL li
 //     'IP'  : Set 'yyy' to the public static IP address of your RaspiBolt (eg. '100.20.30.40')
 //     'FQDN': Set 'yyy' to the public FQDN of your RaspiBolt (eg. 'raspibolt.my.domain.com')
 $source = array('xx'=>'yyy');
-define('ENCRYPTED_PASSWORD',
-'xxxxxxx'
+
+define(
+'ENCRYPTED_PASSWORD',
+'CHANGE ME'
 );
 /////////// END CHANGE ME /////////////
-
-// DIAGNOSTICS: Uncomment next line for diagnotics only
-// echo 'Remote Address='.$_SERVER['REMOTE_ADDR'].' ';
 
 // Only allow if source is the RaspiBolt site
 if(isset($source['IP'])){
