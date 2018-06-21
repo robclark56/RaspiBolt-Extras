@@ -144,13 +144,13 @@ wjNRhxvTnLiGp4xs+F5ocjuQdfO7bbIrmWZ9jw==
 On your webserver, edit the __CHANGE ME__ section in the PHP file to:
 
 * include either the IP ADDRESS or FQDN of your RaspiBolt.
-* enter the output of `cat wallet_password.enc`, as the ENCRYPTED_PASSWORD
+* enter the output of `cat wallet_password.enc`, as the ENCRYPTED_PASSWORD. __CAREFUL:__ Do not accidentally add extra spaces between the `''` characters.
 
 ## Test the PHP file ##
 From the admin login on the RaspiBolt, execute this command (CHANGE_ME should be the FQDN of your webserver. e.g. my.domain.com)
 
 ```bash
-admin ~/temp_unlock  ฿  curl --data "action=getEncryptedPassword" https://CHANGE_ME/raspibolt/utilities.php
+admin ~/temp_unlock  ฿  curl --data "action=getEncryptedPassword" https://CHANGE_ME/raspibolt/utilities.php;echo
 ERn6gAhdCOW9Zc6Y7v/ZvbxVKcorVcoF3OWt+QSuUdVhwLecrDGDk5Z2W8BtYDafXDo4lTujKKCB
 [...lines deleted...]
 wjNRhxvTnLiGp4xs+F5ocjuQdfO7bbIrmWZ9jw=
@@ -201,6 +201,7 @@ curl --insecure \
      --data "{\"wallet_password\":\"$(echo -n ${pw}|base64)\"}"   \
      https://localhost:${restlisten}/v1/unlockwallet
 
+ 
 ```
 
 # Test #
@@ -211,7 +212,7 @@ Note: It is not clear why but lnd responds with `{"error":"context canceled","co
 admin ~  ฿  sudo systemctl restart lnd
 admin ~  ฿  raspibolt
 .....  Wallet Locked  ....
-admin ~  ฿  /etc/cron.hourly/lnd_unlock
+admin ~  ฿  /etc/cron.hourly/lnd_unlock;echo
 {"error":"context canceled","code":1}
 admin ~  ฿  sleep 30;raspibolt
 ```
