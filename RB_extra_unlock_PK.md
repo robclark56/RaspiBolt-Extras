@@ -1,9 +1,4 @@
-#  DRAFT - NOT READY #
-
 [All Extras](README.md) / [Lights Out](https://github.com/robclark56/RaspiBolt-Extras/blob/master/README.md#the-lights-out-raspibolt) / Auto Wallet Unlock using Encyrypted Wallet Password
-
-# DISCLAIMER #
-If you store your Wallet Password anywhere you risk loosing 100% of your wallet funds to bad actors. By implementing any of this guide, you accept 100% of any risk.
 
 ---
 # INTRODUCTION #
@@ -14,6 +9,11 @@ If your lnd wallet is unlocked, the lnd server is effectively offline and can no
 
 This guide explains how to automatically unlock the [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) Lighting (lnd) wallet using a webserver at a different location. The objective is to have a 'Lights Off' RaspiBolt that recovers automatically all the way to an unlocked wallet in the event that it has rebooted and is unattended - e.g. a power failure.
 
+# DISCLAIMER #
+If you store your Wallet Password anywhere you risk loosing 100% of your wallet funds to bad actors. By implementing any of this guide, you accept 100% of any risk.
+
+# LND Version #
+These instructions were written with lnd at version V0.4.2
 # REQUIREMENTS #
 * Your RaspiBolt
 * A webserver at a different location that you control, with
@@ -21,7 +21,7 @@ This guide explains how to automatically unlock the [RaspiBolt](https://github.c
   * [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Note: The webserver does NOT need a valid SSL certificate.
 * Your RaspiBolt must be behind a firewall with either:
   * A static public IP, or
-  * A static public [Fully Qualified Domain Name=FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name). This can be provided using a [Dynamic DNS Service](https://en.wikipedia.org/wiki/Dynamic_DNS).
+  * A static public [Fully Qualified Domain Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) (FQDN). This can be provided using a [Dynamic DNS Service](https://en.wikipedia.org/wiki/Dynamic_DNS).
   
 # SECURITY #
 As the RaspiBolt is probably more secure than your webserver, all password encryption and decryption is done on the RaspiBolt.
