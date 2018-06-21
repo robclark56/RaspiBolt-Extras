@@ -12,7 +12,7 @@ Difficulty: Medium
 
 If your lnd wallet is unlocked, the lnd server is effectively offline and can not participate in the Lightning Network.
 
-This guide explains how to automatically unlock the [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) Lighting (lnd) wallet using a computer at a different location. The objective is to have a 'Lights Off' RaspiBolt that recovers automatically all the way to an unlocked wallet in the event that it has rebooted and is unattended - e.g. a power failure.
+This guide explains how to automatically unlock the [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) Lighting (lnd) wallet using a webserver at a different location. The objective is to have a 'Lights Off' RaspiBolt that recovers automatically all the way to an unlocked wallet in the event that it has rebooted and is unattended - e.g. a power failure.
 
 # REQUIREMENTS #
 * Your RaspiBolt
@@ -27,25 +27,24 @@ This guide explains how to automatically unlock the [RaspiBolt](https://github.c
 As the RaspiBolt is probably more secure than your webserver, all password encryption and decryption is done on the RaspiBolt.
 
 In these instructions, 
- * Your wallet password is not be stored anywhere in plain text; it is stored encrypted (using a Private Key) on the webserver.
- * The Public Key (decryption key) is stored on the webserver.
- * Your wallet password is never transmitted over the Internet; either in Plain Text or Encrypted.
+ * Your wallet password is not be stored anywhere in plain text; it is stored encrypted (using a Public Key) on the webserver.
+ * The Private Key (decryption key) is stored on the RaspiBolt.
  
 |Hacker access after RaspiBolt reboot| Hacker Can ...|Hacker Can Not ...|
 |------|---|-------|
 |RaspiBolt Physical Access||Login, See Wallet Password, Open Wallet, Spend BTC |
-|Remote webserver Login|Open Wallet|See Wallet Password, Spend BTC, Login to OS|
+|Remote webserver Login|Stop wallet automatically unlocking|See Wallet Password, Spend BTC, Login to RaspiBolt|
 
 This does open a new attack vector so adds risk. But to spend your coins, a hacker would still need
 * LAN access to your RaspiBolt, 
 * the admin SSH certificate, and 
-* to have not moved the RaspiBolt to a different network.
+* to have not moved the RaspiBolt to a network with a different public interface.
 
 # DESIGN #
 * A cron job runs hourly on the RaspiBolt.
 * If it finds the wallet is locked, the RaspiBolt ...
-  * retrieves the Public Key from the webserver
-  * decrypts the wallet password using the Public Key
+  * retrieves the encrypted wallet password from the webserver
+  * decrypts the wallet password using the Private Key
   * unlocks the wallet with the wallet password
 * The webserver only responds to requests from the IP address (or FQDN) you nominate.
   
@@ -63,10 +62,6 @@ If not already done, follow [these instructions](https://github.com/Stadicus/gui
 ```
 [Application Options]
 restlisten=localhost:8080
-```
-* Restart your lnd server
-```bash
-admin ~  ฿  sudo systemctl restart lnd
 ```
 ## Prepare your Webserver ## 
 Login to your webserver and add this PHP file so it can be accessed via a URL like: `https://my.domain.com/raspibolt/utilities.php`
@@ -130,11 +125,11 @@ drwxr-xr-x 11 admin admin 4096 Jun 19 14:29 ..
 ## Encrypt your Wallet Password ##
 In the steps below, you will encrypt your password, and then check you can correctly decode it. This is done in such a way that your wallet password is not saved in the terminal history file.
 
-Change `MyUnlockWalletPassword` to the password you enter with the `lncli unlock` command.
+Change `MyUnlockWalletPassword` to your `LND wallet password [C]`.
 
 ```bash
-admin ~/temp_unlock  ฿  echo -n Enter Password:;read -s password; echo -n $password | openssl rsautl -encrypt -inkey public.pem -pubin |base64 > wallet_password.enc;echo
-Enter Password:MyUnlockWalletPassword
+admin ~/temp_unlock  ฿  echo -n 'Enter LND wallet password [C]: ';read -s password; echo -n $password | openssl rsautl -encrypt -inkey public.pem -pubin |base64 > wallet_password.enc;echo
+Enter LND wallet password [C]: MyUnlockWalletPassword
 
 admin ~/temp_unlock  ฿  cat wallet_password.enc | base64 -d | openssl rsautl -decrypt -inkey private.pem;echo
 MyUnlockWalletPassword
@@ -152,7 +147,7 @@ On your webserver, edit the __CHANGE ME__ section in the PHP file to:
 * enter the output of `cat wallet_password.enc`, as the ENCRYPTED_PASSWORD
 
 ## Test the PHP file ##
-From the admin login on the RaspiBolt, exeute this command (CHANGE_ME should be the FQDN of your webserver. e.g. raspibolt.my.domain.com)
+From the admin login on the RaspiBolt, execute this command (CHANGE_ME should be the FQDN of your webserver. e.g. my.domain.com)
 
 ```bash
 admin ~/temp_unlock  ฿  curl --data "action=getEncryptedPassword" https://CHANGE_ME/raspibolt/utilities.php
@@ -161,7 +156,7 @@ ERn6gAhdCOW9Zc6Y7v/ZvbxVKcorVcoF3OWt+QSuUdVhwLecrDGDk5Z2W8BtYDafXDo4lTujKKCB
 wjNRhxvTnLiGp4xs+F5ocjuQdfO7bbIrmWZ9jw=
 ```
 
-If you do not see your Encrypted Password, try temporarily commenting out the line below `// DIAGNOSTICS:` in the PHP file and trying again.
+If you do not see your Encrypted Password, try temporarily commenting out the line in the PHP file below `// DIAGNOSTICS:` and trying again.
 
 ## Move the Private Key to the .lnd directory ##
 Also remove write permission.
@@ -209,10 +204,9 @@ curl --insecure \
 ```
 
 # Test #
-In this section you will lock lnd wallet, and the unlock it with the cron file.
+In this section you will lock your lnd wallet, and then unlock it with the cron file.
 
 Note: It is not clear why but lnd responds with `{"error":"context canceled","code":1}` when the wallet is successfully unlocked.
-
 ```
 admin ~  ฿  sudo systemctl restart lnd
 admin ~  ฿  raspibolt
