@@ -11,7 +11,7 @@ The basic method is:
   * Notice that the external IP address has changed
   * Restart lnd
 
-If you also want to automatically unlock the wallet, see [Auto Lightning Wallet Unlock](https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_01.md).
+If you also want to automatically unlock the wallet, see [Auto Lightning Wallet Unlock](https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_unlock_PK.md).
 
 # Procedure #
 
