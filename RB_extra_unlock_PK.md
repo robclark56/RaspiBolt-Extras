@@ -5,7 +5,7 @@
 
 Difficulty: Medium
 
-If your lnd wallet is unlocked, the lnd server is effectively offline and can not participate in the Lightning Network.
+If your lnd wallet is locked, the lnd server is effectively offline and can not participate in the Lightning Network.
 
 This guide explains how to automatically unlock the [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) Lighting (lnd) wallet using a webserver at a different location. The objective is to have a 'Lights Off' RaspiBolt that recovers automatically all the way to an unlocked wallet in the event that it has rebooted and is unattended - e.g. a power failure.
 
