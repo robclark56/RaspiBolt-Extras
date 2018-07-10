@@ -153,7 +153,7 @@ From the admin login on the RaspiBolt, execute this command (CHANGE_ME should be
 admin ~/temp_unlock  ฿  curl --data "action=getEncryptedPassword" https://CHANGE_ME/raspibolt/utilities.php;echo
 ERn6gAhdCOW9Zc6Y7v/ZvbxVKcorVcoF3OWt+QSuUdVhwLecrDGDk5Z2W8BtYDafXDo4lTujKKCB
 [...lines deleted...]
-wjNRhxvTnLiGp4xs+F5ocjuQdfO7bbIrmWZ9jw=
+wjNRhxvTnLiGp4xs+F5ocjuQdfO7bbIrmWZ9jw==
 ```
 
 If you do not see your Encrypted Password, try temporarily commenting out the line in the PHP file below `// DIAGNOSTICS:` and trying again.
