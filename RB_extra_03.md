@@ -36,7 +36,7 @@ Here is what I see on my RaspiBolt with both running.
 * CPU Temp: 38 degC 
 
 ## LND Version ##
-This documenttaion is based on LND V0.4.2-Beta. 
+This documentaion is based on LND V0.4.2-Beta. 
 
 The biggest hurdle I faced is that while bitcoind seems quite happy with both testnet and mainnet under the same top-level folder, lnd wasn't. 
 
@@ -62,7 +62,7 @@ After completing these instructions here, the 4 instances shown will be operatin
 
 # Overview #
 
-1. [Open new firewall port](#open-new-firewall-port)
+1. [Open new firewall ports](#open-new-firewall-ports)
 1. [Shutdown existing services](#shutdown-existing-services)
 1. [Make testnet3 directory for lnd](make-testnet3-directory-for-lnd)
 1. [New conf files](#new-conf-files)
@@ -71,7 +71,7 @@ After completing these instructions here, the 4 instances shown will be operatin
 1. [cli Aliases](#cli-aliases)
 
 
-## Open New Firewall Port ##
+## Open New Firewall Ports ##
 1. Open new ports in RaspiBolt
 
 `admin ~  ฿  sudo su`
@@ -118,7 +118,7 @@ admin ~  ฿  sudo systemctl stop lnd
 admin ~  ฿  sudo systemctl stop bitcoind
 ```
 
-## Make data_testnet Directory for lnd ##
+## Make testnet Directory for lnd ##
 ```bash
 admin /home/bitcoin/.lnd  ฿  cd /home/bitcoin/.lnd
 admin /home/bitcoin/.lnd  ฿  sudo mkdir testnet
@@ -444,13 +444,12 @@ admin ~  ฿  bct getblockchaininfo
   "chain": "test",
 ...
 admin ~  ฿  lcm unlock
-...
-??
-...
-admin ~  ฿  lct unlock
-...
-?
-...
+Input wallet password:
 
+
+admin ~  ฿  lct unlock
+Input wallet password:
+
+```
 
 
