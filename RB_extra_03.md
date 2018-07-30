@@ -1,8 +1,5 @@
 [All Extras](README.md) / Simultaneous mainnet & testnet
 
-# UNDER CONSTRUCTION #
-
----
 
 # IMPORTANT ! #
 These instructions have NOT been tested where the Raspibolt had existing Bitcoins in the mainnet wallet.
