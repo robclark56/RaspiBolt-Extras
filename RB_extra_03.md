@@ -1,6 +1,6 @@
 [All Extras](README.md) / Simultaneous mainnet & testnet
 
-UNDER CONSTRUCTION
+# UNDER CONSTRUCTION #
 
 ---
 
@@ -17,28 +17,34 @@ Difficulty: *Hard*
 
 There is no reason that you can not run both mainnet & testnet lnd instances at the same time on one [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md). These instructions assume you have a working [RaspiBolt](https://github.com/Stadicus/guides/blob/master/raspibolt/README.md) running successfully and you can successfully switch between mainnet and testnet mode as below.
 
+## Resources ##
+Is the RaspiBolt 'big' enough to handle both instances? Good question. 
 
-## Switching between mainnet and testnet with normal RaspiBolt ##
+My Raspibolt is a Model 3B with these specs:
 
-|Chain|mainnet|testnet|
-|--|--|--|
-|login as admin|
-|cd /home/admin|
-|sudo systemctl stop lnd|
-|sudo systemctl stop bitcoind|
-|sudo nano ~bitcoin/.bitcoin/bitcoin.conf|testnet=0|testnet=1|
-|sudo nano ~bitcoin/.lnd/lnd.conf|[Bitcoin]<br>bitcoin.mainnet=1|[Bitcoin]<br>bitcoin.mainnet=0|
-|sudo systemctl start bitcoind|
-|sudo systemctl status bitcoind|
-|sudo tail -f ~bitcoin/.bitcoin/debug.log<br>Wait until blockchain fully synced ...<br>... progress=1.000000  ...<br>(exit with Ctrl-C)|
-|sudo systemctl start lnd|
-|sudo systemctl status lnd|
-|sudo journalctl -f -u lnd<br>(exit with Ctrl-C)|
+* CPU: 64 bit QuadCore
+* RAM: 1 GB, with SWAP enabled on HDD
+* HDD: USB connected, 1 TByte
+* Power Supply: 2.5A, 5V USB connector
+* Cooling: Stick-on heatlinks & Fan
 
+Here is what I see on my RaspiBolt with both running.
 
-# A Diagram to make things clearer #
+* RAM free: 312MB (of 976MB)
+  * Occasionally drops to 60 ~ 80 MB for short periods
+* CPU: Load ave = 0.68. (= 17% of 4 CPUs)
+* CPU Temp: 38 degC 
+
+## LND Version ##
+This documenttaion is based on LND V0.4.2-Beta. 
+
+The biggest hurdle I faced is that while bitcoind seems quite happy with both testnet and mainnet under the same top-level folder, lnd wasn't. 
+
+# A DIAGRAM TO MAKE THINGS CLEARER #
 After completing these instructions here, the 4 instances shown will be operating on the ports shown below.
 ![Image Ports](images/RaspiBoltDuo01.png)
+
+# PROCEDURE #
 
 ## File Locations ##
 
@@ -46,8 +52,8 @@ After completing these instructions here, the 4 instances shown will be operatin
 
 ||bitcoind<br>mainnet|lnd<br>mainnet|bitcoind<br>testnet|lnd<br>testnet|
 |---|---|---|---|---|
-|data root `[1]`|(.bitcoin)|(.lnd/data)|(.bitcoin/testnet3)|.lnd/data_testnet|
-|conf file`[1]`|(.bitcoin/bitcoin.conf)|(.lnd/lnd.conf)|.bitcoin/testnet3/bitcoin.conf|.lnd/lnd_testnet.conf|
+|data root `[1]`|(.bitcoin)|(.lnd/data)|(.bitcoin/testnet3)|.lnd/testnet/data|
+|conf file`[1]`|(.bitcoin/bitcoin.conf)|(.lnd/lnd.conf)|.bitcoin/testnet3/bitcoin.conf|.lnd/testnet/lnd.conf|
 |service file `[2]`|bitcoind.service|lnd.service|bitcoind_testnet.service|lnd_testnet_service|
 
 `[1]` relative to */home/bitcoin/*
@@ -63,14 +69,15 @@ After completing these instructions here, the 4 instances shown will be operatin
 1. [New services](#new-services)
 1. [Enable and start new services](#enable-and-start-new-services)
 1. [cli Aliases](#cli-aliases)
-1. [Optional] [Update the raspibolt System Overview utility](#update-the-raspibolt-system-overview-utility)
+
 
 ## Open New Firewall Port ##
-1. Open new port in RaspiBolt
+1. Open new ports in RaspiBolt
 
 `admin ~  ฿  sudo su`
 ```
-$ ufw allow 19735  comment 'allow Lightning (testnet)'
+$ ufw allow 19735  comment 'allow Lightning testnet'
+$ ufw allow 18333  comment 'allow Bitcoin testnet'
 $ ufw status
 $ exit
 ```
@@ -83,14 +90,14 @@ Status: active
 To                         Action      From
 --                         ------      ----
 22                         ALLOW       192.168.0.0/24             # allow SSH from local LAN
-9735                       ALLOW       Anywhere                   # allow Lightning
+9735                       ALLOW       Anywhere                   # allow Lightning mainnet
 8333                       ALLOW       Anywhere                   # allow Bitcoin mainnet
 18333                      ALLOW       Anywhere                   # allow Bitcoin testnet
-19735                      ALLOW       Anywhere                   # allow Lightning (testnet)
-9735 (v6)                  ALLOW       Anywhere (v6)              # allow Lightning
+19735                      ALLOW       Anywhere                   # allow Lightning testnet
+9735 (v6)                  ALLOW       Anywhere (v6)              # allow Lightning mainnet
 8333 (v6)                  ALLOW       Anywhere (v6)              # allow Bitcoin mainnet
 18333 (v6)                 ALLOW       Anywhere (v6)              # allow Bitcoin testnet
-19735 (v6)                 ALLOW       Anywhere (v6)              # allow Lightning (testnet)
+19735 (v6)                 ALLOW       Anywhere (v6)              # allow Lightning testnet
 ```
 </p>
 </details>
@@ -103,6 +110,7 @@ Review the [Raspberry Pi](https://github.com/Stadicus/guides/blob/master/raspibo
 |Application name|External port|Internal port|Internal IP address|Protocol (TCP or UDP)|
 |--|--|--|--|--|
 |19375|19375|`<Raspibolt IP>`|`<Raspibolt IP>`|BOTH|
+|18333|18333|`<Raspibolt IP>`|`<Raspibolt IP>`|BOTH|
 
 ## Shutdown existing services ##
 ```
@@ -110,8 +118,7 @@ admin ~  ฿  sudo systemctl stop lnd
 admin ~  ฿  sudo systemctl stop bitcoind
 ```
 
-NO!!!!! YES???
-##Make data_testnet Directory for lnd ##
+## Make data_testnet Directory for lnd ##
 ```bash
 admin /home/bitcoin/.lnd  ฿  cd /home/bitcoin/.lnd
 admin /home/bitcoin/.lnd  ฿  sudo mkdir testnet
@@ -131,7 +138,6 @@ drwx------ 3 bitcoin bitcoin 4096 Apr  2 11:20 logs
 -rw-r--r-- 1 bitcoin bitcoin  741 Apr  8 19:45 tls.cert
 -rw------- 1 bitcoin bitcoin  227 Apr  8 19:45 tls.key
 ```
-NO!!!
 
 ## New conf files ##
 Create or update the files below.
@@ -234,11 +240,11 @@ autopilot.allocation=0.6
 ```
 </p></details>
 
-<details><summary>Click to see /home/bitcoin/.lnd/lnd_testnet.conf</summary><p>
+<details><summary>Click to see /home/bitcoin/.lnd/testnet/lnd.conf</summary><p>
 
 ```bash
 # RaspiBolt LND Testnet: lnd configuration
-# /home/bitcoin/.lnd/lnd_testnet.conf
+# /home/bitcoin/.lnd/testnet/lnd.conf
 
 [Application Options]
 debuglevel=info
@@ -246,8 +252,9 @@ debughtlc=true
 maxpendingchannels=5
 alias=YOUR_NAME [LND]
 color=#68F442
-rpclisten=localhost:11009
-restlisten=localhost:8081
+
+datadir=/home/bitcoin/.lnd/testnet/data
+logdir=/home/bitcoin/.lnd/testnet/logs
 listen=0.0.0.0:19735
 
 [Bitcoin]
@@ -259,8 +266,8 @@ bitcoin.testnet=1
 
 bitcoin.node=bitcoind
 
-#[Bitcoind]
-#bitcoind.zmqpath=tcp://127.0.0.1:28332
+[Bitcoind]
+bitcoind.zmqpath=tcp://127.0.0.1:28332
 
 [autopilot]
 autopilot.active=1
@@ -386,8 +393,7 @@ After=bitcoind.service
 [Service]
 # get var PUBIP from file
 EnvironmentFile=/run/publicip
-
-ExecStart=/usr/local/bin/lnd   --lnddir=/home/bitcoin/.lnd/lnd_testnet.conf --externalip=${PUBLICIP}:19735
+ExecStart=/usr/local/bin/lnd  --configfile=/home/bitcoin/.lnd/testnet/lnd.conf --externalip=${PUBLICIP}:19735
 User=bitcoin
 Group=bitcoin
 LimitNOFILE=128000
@@ -421,8 +427,11 @@ To simplify accessing the 4 daemons from the command line, setup these 4 aliases
 ```bash
 alias bcm='bitcoin-cli -datadir=/home/bitcoin/.bitcoin'
 alias bct='bcm -testnet'
-alias lcm='lncli'
-alias lct='lcm --rpcserver=localhost:11009'
+alias lcm='lncli  \
+              --macaroonpath=/home/admin/.lnd/admin.macaroon \
+              --tlscertpath=/home/admin/.lnd/tls.cert'
+alias lct='lncli  --rpcserver localhost:11009'
+
 ```
 To test these are working OK...
 ```bash
@@ -442,69 +451,6 @@ admin ~  ฿  lct unlock
 ...
 ?
 ...
-```
 
-## Update the raspibolt System Overview utility ##
-
-tba
-
-# Summary of Changes Needed #
-This table shows the state we need to get to so the two lnd instances do not clash. 
-
-|Module|Chain|Item|Original<br>After|Change?|
-|-----:|-----|----|:-------|------------|
-|bitcoind|mainnet|Public Port|8333<br>8333||
-|||RPC Port|8332<br>8332||
-|||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>/home/bitcoin/.bitcoin/bitcoin.conf||
-|||service file|/etc/systemd/system/bitcoind.service<br>/etc/systemd/system/bitcoind.service||
-|||data/log files|xx<br>|xx|
-||testnet|Public Port|18333<br>18333||
-|||RPC Port|18332<br>18332||
-|||conf file|/home/bitcoin/.bitcoin/bitcoin.conf<br>/home/bitcoin/.bitcoin/bitcoin_testnet.conf|Yes|
-|||service file|/etc/systemd/system/bitcoind.service<br>/etc/systemd/system/bitcoind_testnet.service|Yes|
-|||data/log files|xx<br>|xx|
-|lnd|mainnet|Public Port|9735<br>9735||
-|||RPC Port|10009<br>10009||
-|||conf file|/home/bitcoin/.lnd/lnd.conf<br>|xx|
-|||service file|/etc/systemd/system/lnd.service<br>/etc/systemd/system/lnd.service||
-|||data/wallet files|???<br> |xx|
-|||log files|/home/bitcoin/.lnd<br>???|xx|
-|||Security files|/home/bitcoin/.lnd<br>???|xx|
-||testnet|Public Port|9735<br>19735|Yes|
-|||RPC Port|10009<br>11009|Yes|
-|||conf file|/home/bitcoin/.lnd/lnd.conf<br>/home/bitcoin/.lnd/lnd_testnet.conf|Yes|
-|||service file|/etc/systemd/system/lnd.service<br>/etc/systemd/system/lnd_testnet.service|Yes|
-|||data/wallet files|/home/bitcoin/.lnd/data/chain/bitcoin/testnet<br>/home/bitcoin/.lnd/data/chain/bitcoin/testnet||
-|||log files|/home/bitcoin/.lnd/logs/bitcoin/testnet<br>/home/bitcoin/.lnd/logs/bitcoin/testnet||
-|||Security files|/home/bitcoin/.lnd<br>????|xx|
-
-
-????
-
-```
-sudo systemctl enable lnd.service
-sudo systemctl start lnd.service
-sudo systemctl status lnd.service
-
-admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.key /home/bitcoin/.lnd/main/
-admin ~  ฿  sudo cp -p /home/bitcoin/.lnd/tls.cert /home/bitcoin/.lnd/main/
-admin ~  ฿ sudo cp -p /home/bitcoin/.lnd/admin.macaroon /home/bitcoin/.lnd/main/
-sudo su bitcoin
-lncli --lnddir=/home/bitcoin/.lnd/main create
-lncli --lnddir=/home/bitcoin/.lnd/main unlock
-```
-
-
-
-`Use Password_[A]`
-
-admin ~  ฿  sudo adduser bitcoin_testnet
-admin ~  ฿  cd /mnt/hdd 
-admin /mnt/hdd  ฿  sudo su bitcoin
-bitcoin@RaspiBolt:/mnt/hdd $ mkdir bitcoin_testnet
-bitcoin@RaspiBolt:/mnt/hdd $ mkdir lnd_testnet
-bitcoin@RaspiBolt:/mnt/hdd $ exit
-admin /mnt/hdd  ฿  sudo chown -R bitcoin_testnet:bitcoin_testnet /mnt/hdd/bitcoin_testnet
-admin /mnt/hdd  ฿  sudo chown -R bitcoin_testnet:bitcoin_testnet /mnt/hdd/lnd_testnet
 
 
