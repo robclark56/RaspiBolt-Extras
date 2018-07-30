@@ -430,7 +430,12 @@ alias lcm='lncli  \
 alias lct='lncli  --rpcserver localhost:11009'
 
 ```
-To test these are working OK...
+To test these are working OK:
+ * Logout of admin
+ * Login to admin
+ * Enter commands as below
+
+
 ```bash
 admin ~  ฿  bcm getblockchaininfo
 ...
