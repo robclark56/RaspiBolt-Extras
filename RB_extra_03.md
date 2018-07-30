@@ -17,7 +17,7 @@ There is no reason that you can not run both mainnet & testnet lnd instances at 
 ## Resources ##
 Is the RaspiBolt 'big' enough to handle both instances? Good question. 
 
-My Raspibolt is a Model 3B with these specs:
+My RaspiBolt is a Model 3B with these specs:
 
 * CPU: 64 bit QuadCore
 * RAM: 1 GB, with SWAP enabled on HDD
