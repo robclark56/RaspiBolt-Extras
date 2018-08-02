@@ -29,8 +29,12 @@ Here is what I see on my RaspiBolt with both running.
 
 * RAM free: 312MB (of 976MB)
   * Occasionally drops to 60 ~ 80 MB for short periods
-* CPU: Load ave = 0.68. (= 17% of 4 CPUs)
-* CPU Temp: 38 degC 
+* CPU: 
+  * Load ave = 0.68. (17% of 4 CPUs)
+  * Temp: 38 degC 
+* HDD: 26% (of 1TB) used.
+  * When testnet block height = 1356550
+  * When mainnet block height = 534762
 
 ## LND Version ##
 This documentaion is based on LND V0.4.2-Beta. 
