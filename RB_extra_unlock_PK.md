@@ -13,7 +13,7 @@ This guide explains how to automatically unlock the [RaspiBolt](https://github.c
 If you store your Wallet Password anywhere you risk loosing 100% of your wallet funds to bad actors. By implementing any of this guide, you accept 100% of any risk.
 
 # LND Version #
-These instructions were written with lnd at version V0.4.2
+These instructions were written with lnd at version V0.4.2, and updated for V0.5.2.
 # REQUIREMENTS #
 * Your RaspiBolt
 * A webserver at a different location that you control, with
@@ -187,21 +187,31 @@ Change the CHANGE_ME section
 ###### CHANGE_ME ############
 url='my.domain.com/raspibolt/utilities.php'
 ###### END CHANGE_ME ########
-restlisten=8080
+
 locked=$(/usr/local/bin/raspibolt 2> /dev/null | grep 'Wallet Locked' > /dev/null;echo $?)
 if [ "$locked" == "1" ]; then
  exit;
 fi
 
+ln_version=$(/usr/local/bin/lnd --version | awk '{print $3}')
+case $ln_version in
+    0.5*)
+        macaroon='/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon';;
+    0.4*)
+        macaroon='/home/admin/.lnd/admin.macaroon';;
+    *)
+        echo Unknown lnd Version: $ln_version
+        exit
+        ;;
+esac
+restlisten=8080
 response=$(curl -s --data "action=getEncryptedPassword" https://${url})
 pw=$(echo  $response| sed 's/ /\n/g' | base64 -d | openssl rsautl -decrypt -inkey /home/bitcoin/.lnd/private.pem)
 curl --insecure \
      --header "Content-Type: application/json" \
-     --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000  /home/admin/.lnd/admin.macaroon)"  \
+     --header "Grpc-Metadata-macaroon: $(xxd -ps -u -c 1000 $macaroon)"  \
      --data "{\"wallet_password\":\"$(echo -n ${pw}|base64)\"}"   \
-     https://localhost:${restlisten}/v1/unlockwallet
-
- 
+     https://localhost:${restlisten}/v1/unlockwallet 
 ```
 
 # Test #
