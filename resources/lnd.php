@@ -14,8 +14,12 @@
     - amt=Sataoshi (eg: amt=100000)
     - image_only   (eg: image_only=1). memo and/or amt must also be set.
 
-Create $macaroon_hex using this command: 
+Create $macaroon_base64 using this command: 
+ lnd V0.4.x
    $  xxd -ps -u -c 1000  /home/bitcoin/.lnd/invoice.macaroon
+
+lnd V0.5.x
+   $  xxd -ps -u -c 1000  /home/bitcoin/.lnd/data/chain/bitcoin/mainnet/invoice.macaroon
 
 */
 
