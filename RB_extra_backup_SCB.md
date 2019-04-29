@@ -100,8 +100,9 @@ Apr 29 14:49:10 RaspiBolt backup-channels[12873]: Setting up watches.
 Apr 29 14:49:10 RaspiBolt backup-channels[12873]: Watches established.
 
 ```
-If you don't see the output above, something is wrong and must be corrected.
 Type `[Ctrl-C]` to get back to the prompt.
+
+If you don't see the output above, something is wrong and must be corrected.
 ```
 admin ~/.lnd ฿ sudo systemctl stop backup-channels
 
