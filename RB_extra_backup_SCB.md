@@ -72,7 +72,7 @@ while true; do
 done
 
 ```
-Create, edit , and save backup-channels.service
+Create, edit, and save backup-channels.service
 ```
 admin ~/.lnd ฿ sudo nano /etc/systemd/system/backup-channels.service
 
