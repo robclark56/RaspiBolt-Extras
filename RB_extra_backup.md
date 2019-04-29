@@ -1,1 +1,106 @@
-xxxx
+[All Extras](README.md) / [Lights Out](https://github.com/robclark56/RaspiBolt-Extras/blob/master/README.md#the-lights-out-raspibolt) / Auto Backup of channels.backup file
+
+
+UNDER CONSTRUCTION
+
+---
+# INTRODUCTION #
+
+Difficulty: Medium
+
+Since lnd V0.6, Static Channel Backups (SCB) is supported. In a nutshell, every time a channel changes, lnd writes a new copy of the `channels.backup` file. This file is encypted so that it is safe to store on (e.g.) a cloud server. 
+
+This guide explains how to automatically upload `channels.backup` file on changes, to using a webserver on a different host. 
+
+# RISK #
+Minimal. The `channels.backup` file is encypted so that it is safe to transmit over the Internet and to store on (e.g.) a cloud server. 
+
+
+# LND Version #
+These instructions were written with lnd at version V0.6.0-beta
+
+# PREPARATION #
+Follow the instructions here first: [Auto Lightning Wallet Unlock](https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_unlock_PK.md)
+
+You only need to establish `utilities.php` on a webserver you control. You do not HAVE to go all the way and get auto unlock to work if you don't want to.
+
+# INSTRUCTIONS #
+
+## Update utilities.php ##
+Update the utilities.php file so that it looks like as below.
+
+```
+<?php
+/*
+  raspibolt/utilities.php
+  
+  An offsite web server to support a RaspiBolt (https://github.com/Stadicus/guides/blob/master/raspibolt/README.md)
+  
+  Specifically: https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_unlock_PK.md
+
+*/
+
+/////////// CHANGE ME /////////////////
+//Lock down source security 
+// 'xx' must be either:
+//     'IP'  : Set 'yyy' to the public static IP address of your RaspiBolt (eg. '100.20.30.40')
+//     'FQDN': Set 'yyy' to the public FQDN of your RaspiBolt (eg. 'raspibolt.my.domain.com')
+$source = array('xx'=>'yyy');
+
+define(
+'ENCRYPTED_PASSWORD',
+'CHANGE ME'
+);
+/////////// END CHANGE ME /////////////
+
+
+// Only allow if source is the RaspiBolt site
+if(isset($source['IP'])){
+    if($_SERVER['REMOTE_ADDR'] != $source['IP']) exit;
+} elseif (isset($source['FQDN'])) {
+    if($_SERVER['REMOTE_ADDR'] != gethostbyname($source['FQDN'])) exit;
+} else {
+    echo '$source not set';
+    exit;
+}
+
+//CASE 1 - UPLOADING file
+/*
+eg  curl  -F 'file=@channel.backup'  https://my.domain.com/raspibolt/utilities.php
+*/
+if($_FILES){
+    $filename = 'ChannelBackups/'.$_FILES['file']['name'].'_'.date('Ymd_H:i:s');
+    move_uploaded_file($_FILES['file']['tmp_name'], $filename);
+    echo "File $filename saved\n";
+    exit;
+}
+
+//CASE 2 - Actions
+switch($_POST['action']){
+    case 'getEncryptedPassword':
+        echo ENCRYPTED_PASSWORD;
+        exit;
+}
+
+?>
+```
+
+## Create the backup Folder on Your Webserver  ##
+The default location where the `channel.backup` files is stored is  `<current directory>/ChannelBackups`. You can edit `utilities.php` if you want to change that,
+
+On your webserver:
+```
+   cd <the folder where utilities.php is saved>
+   mkdir ChannelBackups
+   chmod 0755 ChannelBackups
+```
+
+## Test 1 ##
+On your Raspibolt:
+```
+login as admin
+   $ sudo curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup'  https://my.domain.com/raspibolt/utilities.php
+
+File ChannelBackups/channel.backup_20190429_01:49:09 saved
+
+```
