@@ -104,3 +104,7 @@ login as admin
 File ChannelBackups/channel.backup_20190429_01:49:09 saved
 
 ```
+
+## Automate Uploads ##
+
+[alexbosworth/inotify-channel-backup.md](https://gist.github.com/alexbosworth/2c5e185aedbdac45a03655b709e255a3)
