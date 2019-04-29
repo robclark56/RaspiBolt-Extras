@@ -73,8 +73,9 @@ Login to your webserver and add this PHP file so it can be accessed via a URL li
   
   An offsite web server to support a RaspiBolt (https://github.com/Stadicus/guides/blob/master/raspibolt/README.md)
   
-  Specifically: https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_unlock_PK.md
-
+  Specifically: 
+    https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_unlock_PK.md
+    https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_SCB_backup.md
 */
 
 /////////// CHANGE ME /////////////////
@@ -100,6 +101,18 @@ if(isset($source['IP'])){
     exit;
 }
 
+//CASE 1 - UPLOADING file
+/*
+eg  curl  -F 'file=@channel.backup'  https://my.domain.com/raspibolt/utilities.php
+*/
+if($_FILES){
+    $filename = 'ChannelBackups/'.$_FILES['file']['name'].'_'.date('Ymd_H:i:s');
+    move_uploaded_file($_FILES['file']['tmp_name'], $filename);
+    echo "File $filename saved\n";
+    exit;
+}
+
+//CASE 2 - Actions
 switch($_POST['action']){
     case 'getEncryptedPassword':
         echo ENCRYPTED_PASSWORD;
