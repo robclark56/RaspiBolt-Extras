@@ -13,7 +13,7 @@ These Extras expand on the excellent [RaspiBolt](https://github.com/Stadicus/gui
 
 1. [Auto Lightning Wallet Unlock](RB_extra_unlock_PK.md) 
 1. [Dynamic Public IP Address](RB_extra_02.md)  [Obsolete since lnd V0.5]
-1. [Auto Backup](RB_extra_backup.md) 
+1. [Auto Backup](RB_extra_backup_SCB.md) 
 
 ---
 
