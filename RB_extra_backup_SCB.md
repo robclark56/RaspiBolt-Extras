@@ -26,67 +26,6 @@ You only need to establish `utilities.php` on a webserver you control. You do no
 
 # INSTRUCTIONS #
 
-## Update utilities.php ##
-Update the `utilities.php` file so that it looks like as below. 
-
-Specifically change the code after `/////////// END CHANGE ME /////////////`
-
-```
-<?php
-/*
-  raspibolt/utilities.php
-  
-  An offsite web server to support a RaspiBolt (https://github.com/Stadicus/guides/blob/master/raspibolt/README.md)
-  
-  Specifically: https://github.com/robclark56/RaspiBolt-Extras/blob/master/RB_extra_unlock_PK.md
-
-*/
-
-/////////// CHANGE ME /////////////////
-//Lock down source security 
-// 'xx' must be either:
-//     'IP'  : Set 'yyy' to the public static IP address of your RaspiBolt (eg. '100.20.30.40')
-//     'FQDN': Set 'yyy' to the public FQDN of your RaspiBolt (eg. 'raspibolt.my.domain.com')
-$source = array('xx'=>'yyy');
-
-define(
-'ENCRYPTED_PASSWORD',
-'CHANGE ME'
-);
-/////////// END CHANGE ME /////////////
-
-
-// Only allow if source is the RaspiBolt site
-if(isset($source['IP'])){
-    if($_SERVER['REMOTE_ADDR'] != $source['IP']) exit;
-} elseif (isset($source['FQDN'])) {
-    if($_SERVER['REMOTE_ADDR'] != gethostbyname($source['FQDN'])) exit;
-} else {
-    echo '$source not set';
-    exit;
-}
-
-//CASE 1 - UPLOADING file
-/*
-eg  curl  -F 'file=@channel.backup'  https://my.domain.com/raspibolt/utilities.php
-*/
-if($_FILES){
-    $filename = 'ChannelBackups/'.$_FILES['file']['name'].'_'.date('Ymd_H:i:s');
-    move_uploaded_file($_FILES['file']['tmp_name'], $filename);
-    echo "File $filename saved\n";
-    exit;
-}
-
-//CASE 2 - Actions
-switch($_POST['action']){
-    case 'getEncryptedPassword':
-        echo ENCRYPTED_PASSWORD;
-        exit;
-}
-
-?>
-```
-
 ## Create the backup Folder on Your Webserver  ##
 The default location where the `channel.backup` files is stored is  `<current directory>/ChannelBackups`. You can edit `utilities.php` if you want to change that,
 
@@ -98,14 +37,14 @@ On your webserver:
 ```
 
 ## Test 1 ##
-On your Raspibolt:
+On your Raspibolt, login as admin and execute the command below. (Change the CHANGE.ME text)
 ```
-login as admin
-   admin ~  ฿ sudo curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup'  https://CHANGE.ME/raspibolt/utilities.php
+admin ~  ฿ sudo curl -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup'  https://CHANGE.ME/raspibolt/utilities.php
 
 File ChannelBackups/channel.backup_20190429_01:49:09 saved
 
 ```
+You should see the message `File ChannelBackups/channel.backup_xxxxxxxx_xx:xx:xx saved`. Also login to your webserver and see if the file was indeed saved. If not, then something is wrong and must be corrected before proceeding.
 
 ## Automate Uploads ##
 The next step is to create a service on the Raspibolt that:
