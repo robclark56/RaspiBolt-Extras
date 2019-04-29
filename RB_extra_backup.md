@@ -27,7 +27,9 @@ You only need to establish `utilities.php` on a webserver you control. You do no
 # INSTRUCTIONS #
 
 ## Update utilities.php ##
-Update the utilities.php file so that it looks like as below.
+Update the utilities.php file so that it looks like as below. 
+
+Specifically change the code after `/////////// END CHANGE ME /////////////`
 
 ```
 <?php
@@ -106,5 +108,76 @@ File ChannelBackups/channel.backup_20190429_01:49:09 saved
 ```
 
 ## Automate Uploads ##
+The next step is to create a service on the Raspibolt that:
+* Notices when the `channel.backup` file has changed
+* Uploads the new `channels.backup` file to your webserver.
 
-[alexbosworth/inotify-channel-backup.md](https://gist.github.com/alexbosworth/2c5e185aedbdac45a03655b709e255a3)
+The method used is based on this from Alex Bosworth: [alexbosworth/inotify-channel-backup.md](https://gist.github.com/alexbosworth/2c5e185aedbdac45a03655b709e255a3)
+
+On your Raspibolt: login as admin. Then create, edit, and save copy-channel-backup-on-change.sh
+
+Edit the `CHANGE.ME` to match your webserver.
+
+```
+admin ~  ฿  cd /home/admin/.lnd
+admin ~/.lnd ฿  touch copy-channel-backup-on-change.sh
+admin ~/.lnd ฿  chmod +x copy-channel-backup-on-change.sh
+admin ~/.lnd ฿  nano copy-channel-backup-on-change.sh
+
+
+#!/bin/bash
+while true; do
+    inotifywait /path/to/.lnd/data/chain/bitcoin/mainnet/channel.backup
+    curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup'  https://CHANGE.ME/raspibolt/utilities.php
+done
+
+```
+Create, edit , and save backup-channels.service
+```
+admin ~/.lnd ฿ sudo nano /etc/systemd/system/backup-channels.service
+
+[Service]
+ExecStart=/home/admin/.lnd/copy-channel-backup-on-change.sh
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=backup-channels
+#User=ubuntu
+#Group=ubuntu
+
+[Install]
+WantedBy=multi-user.target
+
+```
+Manually start the new service, and check the output
+```
+admin ~/.lnd ฿ sudo systemctl start backup-channels
+admin ~/.lnd ฿ journalctl -fu backup-channels
+
+
+xxxx
+```
+
+If you don't see the output above, something is wrong and must be corrected
+```
+admin ~/.lnd ฿ sudo systemctl stop backup-channels
+
+```
+When all looks good, enable the service to start at boot
+```
+admin ~/.lnd ฿ sudo systemctl enable backup-channels
+
+```
+
+## Test 2 ##
+You will now cause the `channel.backup` to change and see if the copy gets uploaded to your webserver.
+```
+admin ~/.lnd ฿ touch /home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup
+```
+
+Logon to your webserver and see if you have a new file.
+```
+e.g.    channel.backup_20190429_01:49:10
+```
+
