@@ -1,5 +1,13 @@
 [All Extras](README.md) / [Lights Out](https://github.com/robclark56/RaspiBolt-Extras/blob/master/README.md#the-lights-out-raspibolt) / Dynamic Public IP
 
+# Now Obsolete #
+Since LND V0.5, this Extra is obsolete. lnd now supports the following lnd.conf entry that supports dynamic IPs.
+
+` nat=true`
+
+See https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf for more info.
+
+
 # Introduction #
 If your [RaspiBolt]() is running on an internet connection that does not have a static IP address and your ISP changes your IP address, then your Lightning Network Node (LNN) has effectively disappeared from the Lightning Network (LN).
 
