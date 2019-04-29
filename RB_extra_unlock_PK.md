@@ -53,7 +53,7 @@ This does open a new attack vector so adds risk. But to spend your coins, a hack
 ## Install _Bonus guide: System overview_ ##
 If not already done, follow [these instructions](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_61_system-overview.md)
 
-![OvervewImage](https://github.com/Stadicus/guides/raw/master/raspibolt/images/60_status_overview.png)
+![OverviewImage](https://stadicus.github.io/RaspiBolt/images/60_status_overview.png)
 ## Prepare your lnd ##
 * Edit your lnd.conf to enable the REST interface. 
 
