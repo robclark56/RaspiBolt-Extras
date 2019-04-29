@@ -93,13 +93,15 @@ WantedBy=multi-user.target
 Manually start the new service, and check the output
 ```
 admin ~/.lnd ฿ sudo systemctl start backup-channels
-admin ~/.lnd ฿ journalctl -fu backup-channels
+admin ~/.lnd ฿ sudo journalctl -fu backup-channels
 
+...
+Apr 29 14:49:10 RaspiBolt backup-channels[12873]: Setting up watches.
+Apr 29 14:49:10 RaspiBolt backup-channels[12873]: Watches established.
 
-xxxx
 ```
-
-If you don't see the output above, something is wrong and must be corrected
+If you don't see the output above, something is wrong and must be corrected.
+Type `[Ctrl-C]` to get back to the prompt.
 ```
 admin ~/.lnd ฿ sudo systemctl stop backup-channels
 
