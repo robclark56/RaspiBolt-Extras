@@ -8,12 +8,12 @@ UNDER CONSTRUCTION
 
 Difficulty: Medium
 
-Since lnd V0.6, Static Channel Backups (SCB) is supported. In a nutshell, every time a channel changes, lnd writes a new copy of the `channels.backup` file. This file is encypted so that it is safe to store on (e.g.) a cloud server. 
+Since lnd V0.6, Static Channel Backups (SCB) is supported. In a nutshell, every time a channel changes, lnd writes a new copy of the `channels.backup` file. This file is encypted so that it is safe to store on (e.g.) a cloud server. For more details, see [v0.6-beta Release Notes](https://github.com/lightningnetwork/lnd/releases/tag/v0.6-beta)
 
-This guide explains how to automatically upload `channels.backup` file on changes, to using a webserver on a different host. 
+This guide explains how to automatically upload the `channels.backup` file on changes, to using a webserver on a different host. 
 
 # RISK #
-Minimal. The `channels.backup` file is encypted so that it is safe to transmit over the Internet and to store on (e.g.) a cloud server. 
+Minimal. The `channels.backup` file is encrypted so that it is safe to transmit over the Internet and to store on (e.g.) a cloud server. 
 
 
 # LND Version #
@@ -27,7 +27,7 @@ You only need to establish `utilities.php` on a webserver you control. You do no
 # INSTRUCTIONS #
 
 ## Update utilities.php ##
-Update the utilities.php file so that it looks like as below. 
+Update the `utilities.php` file so that it looks like as below. 
 
 Specifically change the code after `/////////// END CHANGE ME /////////////`
 
@@ -101,7 +101,7 @@ On your webserver:
 On your Raspibolt:
 ```
 login as admin
-   $ sudo curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup'  https://my.domain.com/raspibolt/utilities.php
+   admin ~  ฿ sudo curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup'  https://CHANGE.ME/raspibolt/utilities.php
 
 File ChannelBackups/channel.backup_20190429_01:49:09 saved
 
@@ -114,11 +114,12 @@ The next step is to create a service on the Raspibolt that:
 
 The method used is based on this from Alex Bosworth: [alexbosworth/inotify-channel-backup.md](https://gist.github.com/alexbosworth/2c5e185aedbdac45a03655b709e255a3)
 
-On your Raspibolt: login as admin. Then create, edit, and save copy-channel-backup-on-change.sh
+On your Raspibolt: login as admin. Install inotify-tools. Then create, edit, and save copy-channel-backup-on-change.sh
 
 Edit the `CHANGE.ME` to match your webserver.
 
 ```
+admin ~  ฿  sudo apt install inotify-tools
 admin ~  ฿  cd /home/admin/.lnd
 admin ~/.lnd ฿  touch copy-channel-backup-on-change.sh
 admin ~/.lnd ฿  chmod +x copy-channel-backup-on-change.sh
