@@ -8,9 +8,9 @@ UNDER CONSTRUCTION
 
 Difficulty: Medium
 
-Since lnd V0.6, Static Channel Backups (SCB) is supported. In a nutshell, every time a channel changes, lnd writes a new copy of the `channels.backup` file. This file is encypted so that it is safe to store on (e.g.) a cloud server. For more details, see [v0.6-beta Release Notes](https://github.com/lightningnetwork/lnd/releases/tag/v0.6-beta)
+Since lnd V0.6, Static Channel Backups (SCB) is supported. In a nutshell, every time a channel changes, lnd writes a new copy of the `channels.backup` file. For more details, see [v0.6-beta Release Notes](https://github.com/lightningnetwork/lnd/releases/tag/v0.6-beta)
 
-This guide explains how to automatically upload the `channels.backup` file on changes, to using a webserver on a different host. 
+This guide explains one way to automatically upload the `channels.backup` file on changes, to using a webserver on a different host. 
 
 # RISK #
 Minimal. The `channels.backup` file is encrypted so that it is safe to transmit over the Internet and to store on (e.g.) a cloud server. 
@@ -68,7 +68,8 @@ admin ~/.lnd ฿  nano copy-channel-backup-on-change.sh
 #!/bin/bash
 while true; do
     inotifywait /path/to/.lnd/data/chain/bitcoin/mainnet/channel.backup
-    curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup'  https://CHANGE.ME/raspibolt/utilities.php
+    curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup' \
+          https://CHANGE.ME/raspibolt/utilities.php
 done
 
 ```
