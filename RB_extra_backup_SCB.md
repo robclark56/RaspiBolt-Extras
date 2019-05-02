@@ -103,14 +103,16 @@ Apr 29 14:49:10 RaspiBolt backup-channels[12873]: Watches established.
 ```
 Type `[Ctrl-C]` to get back to the prompt.
 
-If you don't see the output above, something is wrong and must be corrected.
-```
-admin ~/.lnd ฿ sudo systemctl stop backup-channels
+If:
 
+* you don't see the output above, something is wrong and must be corrected.
 ```
-When all looks good, enable the service to start at boot
+    admin ~/.lnd ฿ sudo systemctl stop backup-channels
+    < fix the problem >
 ```
-admin ~/.lnd ฿ sudo systemctl enable backup-channels
+* otherwise enable the service to start at boot
+```
+    admin ~/.lnd ฿ sudo systemctl enable backup-channels
 
 ```
 
