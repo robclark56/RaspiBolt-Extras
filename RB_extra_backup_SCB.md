@@ -119,7 +119,7 @@ If:
 ## Test 2 ##
 You will now cause the `channel.backup` to change and see if the copy gets uploaded to your webserver.
 ```
-admin ~/.lnd ฿ touch /home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup
+admin ~/.lnd ฿ sudo touch /home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup
 ```
 
 Logon to your webserver and see if you have a new file.
