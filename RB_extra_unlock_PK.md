@@ -89,6 +89,11 @@ define(
 'ENCRYPTED_PASSWORD',
 'CHANGE ME'
 );
+
+//EMAIL ADDRESS FOR NOTIFICATIONS
+//If BLANK, no emails sent
+$notifyEmail = '';
+
 /////////// END CHANGE ME /////////////
 
 // Only allow if source is the RaspiBolt site
@@ -109,6 +114,7 @@ if($_FILES){
     $filename = 'ChannelBackups/'.$_FILES['file']['name'].'_'.date('Ymd_H:i:s');
     move_uploaded_file($_FILES['file']['tmp_name'], $filename);
     echo "File $filename saved\n";
+    if($notifyEmail) mail($notifyEmail,"[raspibolt] File $filename saved" ,__FILE__);
     exit;
 }
 
