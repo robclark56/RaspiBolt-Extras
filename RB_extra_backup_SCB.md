@@ -67,7 +67,7 @@ admin ~/.lnd ฿  nano copy-channel-backup-on-change.sh
 
 #!/bin/bash
 while true; do
-    inotifywait /path/to/.lnd/data/chain/bitcoin/mainnet/channel.backup
+    inotifywait /home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup
     curl  -F 'file=@/home/bitcoin/.lnd/data/chain/bitcoin/mainnet/channel.backup' \
           https://CHANGE.ME/raspibolt/utilities.php
 done
