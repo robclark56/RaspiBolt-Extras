@@ -48,7 +48,7 @@ The next step is to create a service on the Raspibolt that:
 * Notices when the `channel.backup` file has changed
 * Uploads the new `channels.backup` file to your webserver.
 
-The method used is based on this from Alex Bosworth: [alexbosworth/inotify-channel-backup.md](https://gist.github.com/alexbosworth/2c5e185aedbdac45a03655b709e255a3). Alex's method uses a simp 'cp' (Copy) command which is limited if you are trying to create an off-site backup. Of course there are probably many other ways of sending the backup file off-site; I am simply documenting the methoid I used as I was already using the off-site webserver to automate my wallet unlocks.
+The method used is based on this from Alex Bosworth: [alexbosworth/inotify-channel-backup.md](https://gist.github.com/alexbosworth/2c5e185aedbdac45a03655b709e255a3). Alex's method uses a simple 'cp' (Copy) command which is limited if you are trying to create an off-site backup. Of course there are probably many other ways of sending the backup file off-site; I am simply documenting the method I used as I was already using the off-site webserver to automate my wallet unlocks.
 
 On your Raspibolt: login as admin. Install inotify-tools. Then create, edit, and save copy-channel-backup-on-change.sh
 
