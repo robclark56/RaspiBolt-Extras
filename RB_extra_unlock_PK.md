@@ -13,7 +13,7 @@ This guide explains how to automatically unlock the [RaspiBolt](https://github.c
 If you store your Wallet Password anywhere you risk loosing 100% of your wallet funds to bad actors. By implementing any of this guide, you accept 100% of any risk.
 
 # LND Version #
-These instructions were written with lnd at version V0.4.2, and updated for V0.5.2.
+These instructions were written with lnd at version V0.4.2, and updated for V0.7.*.
 # REQUIREMENTS #
 * Your RaspiBolt
 * A webserver at a different location that you control, with
@@ -214,6 +214,10 @@ fi
 
 ln_version=$(/usr/local/bin/lnd --version | awk '{print $3}')
 case $ln_version in
+    0.7*)
+        macaroon='/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon';;
+    0.6*)
+        macaroon='/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon';;
     0.5*)
         macaroon='/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon';;
     0.4*)
