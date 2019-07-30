@@ -84,7 +84,7 @@ admin ~  ฿  sudo chown -R admin:admin /home/admin/.lnd
 ```
 
 # Create Macroon file on Host #
-Different Macaroons permit the WAN Host to perform different tasks. See the end of [this file](https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_66_remote_lncli.md) for full details. In this exercise, we will use the *invoice.macaroon*.
+Different Macaroons permit the WAN Host to perform different tasks. See the end of [this file](https://stadicus.github.io/RaspiBolt/raspibolt_66_remote_lncli.html) for full details. In this exercise, we will use the *invoice.macaroon*.
 
 * Get ASCII version of the macaroon file
 1. **For lnd V0.4.x**
